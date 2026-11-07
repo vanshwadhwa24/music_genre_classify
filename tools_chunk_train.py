@@ -216,7 +216,7 @@ def finalize(trainer, best_epoch, best_val_acc, best_val_loss, total_time):
         }, f, indent=2)
     if len(trainer.history["epoch"]) > 1:
         src = (PROJECT_ROOT / "ml" / "scripts" / "train.py").read_text()
-        ns = {}
+        ns = {"__file__": str(PROJECT_ROOT / "ml" / "scripts" / "train.py")}
         exec(compile(src.split("def main()")[0], "train_mod", "exec"), ns)
         ns["plot_training_history"](trainer.history, PROJECT_ROOT / "ml" / "reports" / "training_curves.png")
     print(f"FINAL best_val_acc={best_val_acc*100:.2f}% @ epoch {best_epoch}, time={total_time:.0f}s", flush=True)
