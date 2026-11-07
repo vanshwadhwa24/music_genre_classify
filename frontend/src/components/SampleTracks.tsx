@@ -59,7 +59,7 @@ export const SampleTracks: React.FC<SampleTracksProps> = ({ onSelectSample, disa
               WHAT ARE YOU JAMMING ON?
             </h3>
             <p className="text-xs text-[#7A5247] font-medium">
-              Pick a synthesized demonstration track from the crate to test instant classification
+              Pick a synthesized demonstration track from the crate to test the live pipeline (12s clips, outside the 30s GTZAN training data - scores are a demo, not an accuracy claim)
             </p>
           </div>
         </div>
