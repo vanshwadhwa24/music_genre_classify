@@ -1,0 +1,20 @@
+GTZAN Held-Out Test Set Evaluation Report
+Checkpoint: /home/sandbox/music_genre_classify/artifacts/models/genre_cnn.pt
+Overall Accuracy: 49.50%
+
+              precision    recall  f1-score   support
+
+       Blues     0.4286    0.3000    0.3529        10
+   Classical     0.8182    0.9000    0.8571        10
+     Country     0.4615    0.6000    0.5217        10
+       Disco     0.2500    0.1000    0.1429        10
+     Hip-Hop     0.5000    0.2727    0.3529        11
+        Jazz     0.5000    0.4000    0.4444        10
+       Metal     0.6429    0.9000    0.7500        10
+         Pop     0.3000    0.6000    0.4000        10
+      Reggae     0.5556    0.5000    0.5263        10
+        Rock     0.4444    0.4000    0.4211        10
+
+    accuracy                         0.4950       101
+   macro avg     0.4901    0.4973    0.4769       101
+weighted avg     0.4902    0.4950    0.4757       101
