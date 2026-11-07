@@ -1,0 +1,27 @@
+{
+  "best_epoch": 1,
+  "best_val_acc": 0.625,
+  "best_val_loss": 2.199,
+  "total_duration_seconds": 12.2,
+  "device": "cpu",
+  "history": {
+    "epoch": [
+      1
+    ],
+    "train_loss": [
+      2.1414
+    ],
+    "train_acc": [
+      0.4062
+    ],
+    "val_loss": [
+      2.199
+    ],
+    "val_acc": [
+      0.625
+    ],
+    "learning_rate": [
+      0.001
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+# Environments & Virtualenvs
+.venv/
+env/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.pt
+*.pth
+*.onnx
+
+# Data & Audio
+data/
+*.wav
+*.mp3
+*.ogg
+*.m4a
+*.au
+*.tar.gz
+*.zip
+!frontend/public/samples/*.wav
+
+# Node & Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+.cache/
+
+# IDE & OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.log

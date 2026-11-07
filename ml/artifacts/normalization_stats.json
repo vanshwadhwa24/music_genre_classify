@@ -1,0 +1,10 @@
+{
+  "mean": -42.66357,
+  "std": 15.480008,
+  "count_spectrograms": 798,
+  "sample_rate": 22050,
+  "n_mels": 128,
+  "hop_length": 512,
+  "n_fft": 2048,
+  "target_duration": 30.0
+}
