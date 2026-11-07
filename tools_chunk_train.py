@@ -67,7 +67,7 @@ def main():
                               cfg=cfg, audio_cfg=audio_config, checkpoint_path=CKPT_PATH,
                               normalization_stats=norm_stats or {})
 
-    start_epoch, start_batch = 1, 0
+    start_epoch, start_batch, start_metrics = 1, 0, None
     best_val_acc, best_val_loss, best_epoch, patience_counter = 0.0, float("inf"), 0, 0
     elapsed = 0.0
 
@@ -79,6 +79,7 @@ def main():
         trainer.history = st["history"]
         start_epoch = st["epoch"]
         start_batch = st["batch_idx"]
+        start_metrics = st.get("metrics")
         best_val_acc = st["best_val_acc"]
         best_val_loss = st["best_val_loss"]
         best_epoch = st["best_epoch"]
@@ -103,6 +104,8 @@ def main():
         t0 = time.time()
         total_loss, correct, total = 0.0, 0, 0
         b0 = start_batch if epoch == start_epoch else 0
+        if epoch == start_epoch and start_metrics:
+            total_loss, correct, total = start_metrics
 
         for bi, (inputs, targets) in enumerate(train_loader):
             if bi < b0:
@@ -122,12 +125,24 @@ def main():
                 over = time.time() > budget_end
                 atomic_save(state(model, trainer, epoch, bi + 1, best_val_acc,
                                   best_val_loss, best_epoch, patience_counter,
-                                  elapsed + (time.time() - t0)), STATE_PATH)
+                                  elapsed + (time.time() - t0),
+                                  metrics=(total_loss, correct, total)), STATE_PATH)
                 print(f"[save] epoch {epoch} batch {bi+1} acc {correct/total*100:.1f}% t={time.time()-t0:.0f}s", flush=True)
                 if over:
                     print(f"CHUNK_DONE mid-epoch {epoch} batch {bi+1}", flush=True)
                     return
 
+        if total == 0:
+            # resumed at/after final batch with no metrics: forward-only pass for honest metrics
+            model.eval()
+            with torch.no_grad():
+                for inputs, targets in train_loader:
+                    outputs = model(inputs)
+                    loss = trainer.criterion(outputs, targets)
+                    bs = targets.size(0)
+                    total_loss += loss.item() * bs
+                    correct += (outputs.argmax(1) == targets).sum().item()
+                    total += bs
         train_loss, train_acc = total_loss / total, correct / total
         val_loss, val_acc = trainer.validate()
         curr_lr = trainer.optimizer.param_groups[0]["lr"]
@@ -171,8 +186,9 @@ def main():
     print("TRAINING_COMPLETE", flush=True)
 
 
-def state(model, trainer, epoch, batch_idx, bva, bvl, be, pc, elapsed):
+def state(model, trainer, epoch, batch_idx, bva, bvl, be, pc, elapsed, metrics=None):
     return {
+        "metrics": metrics,
         "model": model.state_dict(),
         "optimizer": trainer.optimizer.state_dict(),
         "scheduler": trainer.scheduler.state_dict(),
