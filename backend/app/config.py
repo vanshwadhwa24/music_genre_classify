@@ -15,7 +15,7 @@ class Settings(BaseModel):
     # Model configuration
     model_checkpoint_path: str = os.getenv(
         "MODEL_PATH",
-        str(ROOT_DIR / "artifacts" / "models" / "genre_cnn_baseline.pt")
+        str(ROOT_DIR / "artifacts" / "models" / "genre_cnn.pt")
     )
     
     # Audio configuration

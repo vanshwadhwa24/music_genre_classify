@@ -139,11 +139,29 @@ python ml/training/train.py \
   --save-path artifacts/models/genre_cnn.pt
 ```
 
+### Training Results (committed checkpoint)
+The committed checkpoint `artifacts/models/genre_cnn.pt` was trained on the cached GTZAN
+spectrograms in this repo (999 valid tracks; leakage-checked 798/100/101 train/val/test split,
+see `ml/reports/splits.json` and `ml/reports/audit_report.md`):
+
+- Best validation accuracy: **66.0%** (epoch 23, early stopping; `ml/reports/training_history.json`, `ml/reports/training_curves.png`)
+- Held-out **test accuracy: 49.5%**, macro F1 47.7% on 101 untouched tracks (`ml/reports/evaluation_report.md`, `ml/reports/confusion_matrix.png`)
+- Strongest on Classical (90% recall) and Metal (90%); Disco/Pop and Hip-Hop/Pop are the most confused pairs, consistent with known GTZAN difficulty.
+
+Reproduce evaluation with:
+```bash
+python ml/scripts/evaluate.py   # or: python ml/evaluation/evaluate.py
+```
+
+**Input length note:** the model was trained on 30-second clips. Uploads of 30s or longer
+are truncated to 30s and behave like the evaluation. Shorter uploads are zero-padded to 30s,
+which shifts input statistics and degrades prediction quality.
+
 ### Model Checkpoint Integration
 The backend automatically detects and loads checkpoints:
-- **Baseline / Development Checkpoint:** `artifacts/models/genre_cnn_baseline.pt` (loaded by default).
-- **Trained Model Checkpoint:** Set `MODEL_PATH=artifacts/models/genre_cnn.pt` or overwrite `artifacts/models/genre_cnn_baseline.pt`.
-- The application status badge dynamically updates from `Baseline PyTorch CNN` to `Trained CNN Model`.
+- **Trained Model Checkpoint (committed):** `artifacts/models/genre_cnn.pt` (loaded by default; GTZAN test accuracy 49.5%, macro F1 47.7% - see `ml/reports/evaluation_report.md`).
+- Override with `MODEL_PATH=<path>` to load a different checkpoint.
+- If no checkpoint is found the app falls back to randomly initialized weights and the status badge shows `Baseline PyTorch CNN`; with the trained checkpoint it shows `Trained CNN Model`.
 
 ---
 

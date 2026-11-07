@@ -29,6 +29,8 @@ class ModelManager:
         self.model_status: str = "UNAVAILABLE"
         self.is_mock: bool = False
         self.loaded_checkpoint_path: Optional[str] = None
+        self.norm_mean: Optional[float] = None
+        self.norm_std: Optional[float] = None
         # Rolling prediction smoothing buffer for live audio (exponential moving average)
         self.live_ema_scores: Optional[np.ndarray] = None
         self.ema_alpha: float = 0.45  # Weight of new window vs history
@@ -50,6 +52,18 @@ class ModelManager:
                     self.model.load_state_dict(checkpoint)
                     status = "ACTIVE_MODEL"
 
+                # Restore the normalization statistics the model was trained with
+                stats = checkpoint.get("normalization_stats") if isinstance(checkpoint, dict) else None
+                if stats is None:
+                    stats_path = Path(settings.model_checkpoint_path).parent.parent.parent / "ml" / "artifacts" / "normalization_stats.json"
+                    if stats_path.exists():
+                        import json
+                        stats = json.loads(stats_path.read_text())
+                if stats:
+                    self.norm_mean = float(stats["mean"])
+                    self.norm_std = float(stats["std"])
+                    print(f"[ModelManager] Normalization stats restored (mean={self.norm_mean:.3f}, std={self.norm_std:.3f}).")
+
                 self.model.eval()
                 self.model_status = status
                 self.is_mock = False
@@ -65,14 +79,14 @@ class ModelManager:
         self.model.eval()
         self.model_status = "DEVELOPMENT_BASELINE"
         self.is_mock = False
-        self.loaded_checkpoint_path = "In-memory He-initialized baseline"
+        self.loaded_checkpoint_path = "In-memory He-initialized weights (no checkpoint found)"
 
     def predict(self, mel_db: np.ndarray) -> PredictionResult:
         """Run Mel-spectrogram through GenreCNN."""
         if self.model is None:
             self.load_model()
             
-        mel_norm = normalize_spectrogram(mel_db)
+        mel_norm = normalize_spectrogram(mel_db, mean=self.norm_mean, std=self.norm_std)
         
         # Shape: (1, 1, n_mels, time_steps)
         tensor = torch.from_numpy(mel_norm).unsqueeze(0).unsqueeze(0).float().to(self.device)
@@ -88,7 +102,7 @@ class ModelManager:
         if self.model is None:
             self.load_model()
 
-        mel_norm = normalize_spectrogram(mel_db)
+        mel_norm = normalize_spectrogram(mel_db, mean=self.norm_mean, std=self.norm_std)
         tensor = torch.from_numpy(mel_norm).unsqueeze(0).unsqueeze(0).float().to(self.device)
 
         with torch.no_grad():
