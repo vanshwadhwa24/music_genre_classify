@@ -22,6 +22,7 @@ export const LivePage: React.FC<LivePageProps> = ({ isBackendHealthy }) => {
   const [isInferring, setIsInferring] = useState<boolean>(false)
 
   const streamerRef = useRef<AudioStreamer | null>(null)
+  const firstSliceSent = useRef<boolean>(false)
 
   // Cleanup on unmount: always release microphone and AudioContext
   useEffect(() => {
@@ -37,6 +38,7 @@ export const LivePage: React.FC<LivePageProps> = ({ isBackendHealthy }) => {
     setPermissionError(null)
     setStatusMessage('Requesting microphone access...')
 
+    firstSliceSent.current = false
     const streamer = new AudioStreamer({
       onAudioChunk: async (blob: Blob) => {
         setSliceCount((prev) => prev + 1)
@@ -44,7 +46,9 @@ export const LivePage: React.FC<LivePageProps> = ({ isBackendHealthy }) => {
         setStatusMessage('Evaluating audio window...')
 
         try {
-          const res = await apiService.predictLive(blob, sliceCount === 0)
+          const isFirst = !firstSliceSent.current
+          firstSliceSent.current = true
+          const res = await apiService.predictLive(blob, isFirst)
           setLivePrediction(res)
           setStatusMessage(`Live stream active · Slice #${sliceCount + 1}`)
         } catch (err: unknown) {
