@@ -6,8 +6,8 @@ interface MarqueeBannerProps {
 }
 
 export const MarqueeBanner: React.FC<MarqueeBannerProps> = ({
-  text = 'WHAT ARE YOU JAMMING ON? ★ SOUND, MADE VISIBLE ★ 10 GTZAN GENRES ★ REAL-TIME CNN LISTENING ★ MEL-SPECTROGRAM ANALYSIS ★',
-  bg = 'bg-[#FF3CAC]',
+  text = 'NEON RADIO ★ 10 GTZAN GENRES ★ MEL-SPECTROGRAM CNN ★ UPLOAD OR LISTEN ★',
+  bg = 'bg-[#14032A]',
 }) => {
   return (
     <div className={`w-full overflow-hidden border-y-2 border-[#FF3CAC] ${bg} py-2.5 select-none`}>
