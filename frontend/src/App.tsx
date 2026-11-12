@@ -6,7 +6,7 @@ import { DiscoverPage } from './pages/DiscoverPage'
 import { LivePage } from './pages/LivePage'
 import { AboutPage } from './pages/AboutPage'
 import { apiService } from './services/api'
-import { JambirdMascot } from './components/JambirdMascot'
+import { NeonLogo } from './components/NeonLogo'
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>
@@ -92,10 +92,10 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#FFF9E9] text-[#4B2B23] flex flex-col selection:bg-[#F49ACB] selection:text-[#4B2B23]">
+    <div className="min-h-screen bg-[#1A0536] text-[#1A0536] flex flex-col selection:bg-[#FF3CAC] selection:text-[#1A0536]">
       {/* Offline Notification Banner */}
       {isOffline && (
-        <div className="bg-[#FFDF43] border-b-2 border-[#4B2B23] px-4 py-2.5 text-center text-xs font-bold text-[#4B2B23] flex items-center justify-center gap-2">
+        <div className="bg-[#FFB347] border-b-2 border-[#FF3CAC] px-4 py-2.5 text-center text-xs font-bold text-[#1A0536] flex items-center justify-center gap-2">
           <WifiOff className="w-4 h-4" />
           <span>
             YOU ARE OFFLINE · The application shell is cached via PWA, but genre inference requires a live backend.
@@ -126,33 +126,33 @@ export const App: React.FC = () => {
       </main>
 
       {/* Playful Editorial Footer */}
-      <footer className="border-t-2 border-[#4B2B23] bg-[#FFDF43] py-8 px-4 text-xs font-bold text-[#4B2B23]">
+      <footer className="border-t-2 border-[#FF3CAC] bg-[#FFB347] py-8 px-4 text-xs font-bold text-[#1A0536]">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white border-2 border-[#4B2B23] shadow-brutal-sm flex items-center justify-center overflow-hidden">
-              <JambirdMascot size={40} variant="icon" />
+            <div className="w-10 h-10 rounded-xl bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal-sm flex items-center justify-center overflow-hidden">
+              <NeonLogo size={40} variant="icon" />
             </div>
             <div>
-              <span className="text-xl font-display tracking-tight text-[#4B2B23] leading-none block">
-                JAMBIRD
+              <span className="text-xl font-display tracking-tight text-[#FFE9FF] leading-none block">
+                NEON RADIO
               </span>
-              <span className="text-[11px] font-mono text-[#4B2B23]/80">
+              <span className="text-[11px] font-mono text-[#FFE9FF]/80">
                 SOUND, MADE VISIBLE · GTZAN CNN PWA
               </span>
             </div>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-2 font-mono text-[11px]">
-            <span className="bg-white px-3 py-1 rounded-full border border-[#4B2B23] shadow-brutal-sm">
+            <span className="bg-[#2A0A4A] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
               PYTORCH 2D-CNN
             </span>
-            <span className="bg-[#F49ACB] px-3 py-1 rounded-full border border-[#4B2B23] shadow-brutal-sm">
+            <span className="bg-[#FF3CAC] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
               22.05 KHZ MONO
             </span>
-            <span className="bg-[#8CA4E8] px-3 py-1 rounded-full border border-[#4B2B23] shadow-brutal-sm">
+            <span className="bg-[#3DFFD0] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
               128 MEL BANDS
             </span>
-            <span className="bg-white px-3 py-1 rounded-full border border-[#4B2B23] shadow-brutal-sm">
+            <span className="bg-[#2A0A4A] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
               PWA ENABLED
             </span>
           </div>

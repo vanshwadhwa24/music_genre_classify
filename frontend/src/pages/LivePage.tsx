@@ -97,29 +97,29 @@ export const LivePage: React.FC<LivePageProps> = ({ isBackendHealthy }) => {
       {/* Playful Ticker Banner */}
       <MarqueeBanner
         text="★ LIVE ACOUSTIC RADAR ★ REAL-TIME MICROPHONE LISTENING ★ ROLLING 2.5S AUDIO WINDOWS ★"
-        bg="bg-[#FFDF43]"
+        bg="bg-[#FFB347]"
       />
 
       <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12 flex flex-col justify-between min-h-[calc(100vh-12rem)] space-y-8">
         {/* Top Status & Disclaimers */}
         <div className="flex flex-col items-center gap-3.5 text-center">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border-2 border-[#4B2B23] shadow-brutal-sm text-xs font-mono font-bold">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal-sm text-xs font-mono font-bold">
             <span
-              className={`w-3 h-3 rounded-full border border-[#4B2B23] ${
+              className={`w-3 h-3 rounded-full border border-[#FF3CAC] ${
                 isListening
-                  ? 'bg-[#288C56] shadow-[0_0_10px_#288C56] animate-pulse'
-                  : 'bg-[#FFDF43]'
+                  ? 'bg-[#3DFFD0] shadow-[0_0_10px_#3DFFD0] animate-pulse'
+                  : 'bg-[#FFB347]'
               }`}
             />
-            <span className="text-[#4B2B23]">{statusMessage.toUpperCase()}</span>
+            <span className="text-[#FFE9FF]">{statusMessage.toUpperCase()}</span>
             {isInferring && (
-              <span className="text-[#4B2B23] bg-[#F49ACB] px-2 py-0.5 rounded border border-[#4B2B23] animate-pulse">
+              <span className="text-[#1A0536] bg-[#FF3CAC] px-2 py-0.5 rounded border border-[#FF3CAC] animate-pulse">
                 INFERRING...
               </span>
             )}
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-bold text-[#7A5247]">
+          <div className="flex items-center gap-2 text-xs font-bold text-[#C9A8E0]">
             <StatusBadge
               status={livePrediction?.model_status || 'DEVELOPMENT_BASELINE'}
               isMock={livePrediction?.is_mock || false}
@@ -130,7 +130,7 @@ export const LivePage: React.FC<LivePageProps> = ({ isBackendHealthy }) => {
 
           {/* Backend Warning */}
           {isBackendHealthy === false && (
-            <div className="p-3.5 rounded-xl bg-[#FFF9E9] border-2 border-[#E5484D] shadow-brutal-sm text-xs font-bold text-[#E5484D] flex items-center gap-2 max-w-lg">
+            <div className="p-3.5 rounded-xl bg-[#1A0536] border-2 border-[#FF6B8A] shadow-brutal-sm text-xs font-bold text-[#FF6B8A] flex items-center gap-2 max-w-lg">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>
                 FastAPI backend unreachable. The vinyl visualizer responds to mic locally, but predictions require the server.
@@ -140,11 +140,11 @@ export const LivePage: React.FC<LivePageProps> = ({ isBackendHealthy }) => {
 
           {/* Permission Denied Error */}
           {permissionError && (
-            <div className="p-4 rounded-xl bg-[#FFF9E9] border-2 border-[#E5484D] shadow-brutal text-xs text-[#4B2B23] flex items-start gap-3 max-w-md text-left">
-              <ShieldAlert className="w-5 h-5 shrink-0 text-[#E5484D] mt-0.5" />
+            <div className="p-4 rounded-xl bg-[#1A0536] border-2 border-[#FF6B8A] shadow-brutal text-xs text-[#FFE9FF] flex items-start gap-3 max-w-md text-left">
+              <ShieldAlert className="w-5 h-5 shrink-0 text-[#FF6B8A] mt-0.5" />
               <div>
-                <p className="font-bold text-sm text-[#E5484D] mb-0.5">Microphone Permission Required</p>
-                <p className="text-[#7A5247] leading-relaxed font-medium">{permissionError}</p>
+                <p className="font-bold text-sm text-[#FF6B8A] mb-0.5">Microphone Permission Required</p>
+                <p className="text-[#C9A8E0] leading-relaxed font-medium">{permissionError}</p>
               </div>
             </div>
           )}
@@ -159,14 +159,14 @@ export const LivePage: React.FC<LivePageProps> = ({ isBackendHealthy }) => {
 
           {/* Leading Genre Display */}
           <div className="mt-6 text-center">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#4B2B23] bg-[#FFDF43] px-3 py-1 rounded-full border border-[#4B2B23] shadow-brutal-sm inline-block mb-2">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#1A0536] bg-[#FFB347] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm inline-block mb-2">
               {isListening
                 ? livePrediction
                   ? 'DETECTED ACOUSTIC GENRE'
                   : 'BUFFERING AUDIO SLICE...'
                 : 'TURNTABLE STANDBY'}
             </span>
-            <h2 className="text-5xl sm:text-7xl font-display tracking-tight text-[#4B2B23] uppercase leading-none">
+            <h2 className="text-5xl sm:text-7xl font-display tracking-tight text-[#FFE9FF] uppercase leading-none">
               {livePrediction
                 ? livePrediction.leading_display_name
                 : isListening
@@ -190,7 +190,7 @@ export const LivePage: React.FC<LivePageProps> = ({ isBackendHealthy }) => {
               ))}
             </div>
           ) : (
-            <div className="p-4 rounded-2xl bg-white border-2 border-[#4B2B23] shadow-brutal-sm text-center text-xs font-mono font-bold text-[#7A5247]">
+            <div className="p-4 rounded-2xl bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal-sm text-center text-xs font-mono font-bold text-[#C9A8E0]">
               {isListening
                 ? 'Analyzing ambient harmonics... genre activations will appear after the first 2.5s slice.'
                 : 'Click START LISTENING to engage the microphone stream and real-time CNN inference.'}
@@ -202,7 +202,7 @@ export const LivePage: React.FC<LivePageProps> = ({ isBackendHealthy }) => {
             {!isListening ? (
               <button
                 onClick={handleStartListening}
-                className="flex items-center gap-3 px-9 py-4 rounded-2xl bg-[#F49ACB] hover:bg-[#FFDF43] text-[#4B2B23] text-base font-display tracking-wide border-2 border-[#4B2B23] shadow-brutal transition-all brutal-btn"
+                className="flex items-center gap-3 px-9 py-4 rounded-2xl bg-[#FF3CAC] hover:bg-[#FFB347] text-[#1A0536] text-base font-display tracking-wide border-2 border-[#FF3CAC] shadow-brutal transition-all brutal-btn"
               >
                 <Mic className="w-5 h-5 fill-current" />
                 <span>START LISTENING</span>
@@ -210,7 +210,7 @@ export const LivePage: React.FC<LivePageProps> = ({ isBackendHealthy }) => {
             ) : (
               <button
                 onClick={handleStopListening}
-                className="flex items-center gap-3 px-9 py-4 rounded-2xl bg-[#FFF9E9] hover:bg-[#E5484D] hover:text-white text-[#4B2B23] text-base font-display tracking-wide border-2 border-[#4B2B23] shadow-brutal transition-all brutal-btn"
+                className="flex items-center gap-3 px-9 py-4 rounded-2xl bg-[#1A0536] hover:bg-[#FF6B8A] hover:text-white text-[#1A0536] text-base font-display tracking-wide border-2 border-[#FF3CAC] shadow-brutal transition-all brutal-btn"
               >
                 <Square className="w-5 h-5 fill-current" />
                 <span>STOP LISTENING</span>
