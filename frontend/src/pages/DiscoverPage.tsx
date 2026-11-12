@@ -148,31 +148,39 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = ({ isBackendHealthy }) 
     <div className="w-full">
       {/* 1. Playful Editorial Hero Section (Neon Radio style) */}
       {!analysisResult && (
-        <section className="bg-[#FFB347] border-b-2 border-[#FF3CAC] pt-10 pb-8 px-4 sm:px-6 relative overflow-hidden">
-          <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        <section
+          className="border-b-2 border-[#FF3CAC] pt-10 pb-24 px-4 sm:px-6 relative overflow-hidden"
+          style={{ background: 'linear-gradient(180deg,#14032A 0%,#2A0A4A 60%,#4A0E4E 100%)' }}
+        >
+          {/* retro grid floor */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-40 pointer-events-none opacity-60"
+            style={{
+              backgroundImage:
+                'linear-gradient(rgba(255,60,172,0.55) 1px, transparent 1px), linear-gradient(90deg, rgba(255,60,172,0.45) 1px, transparent 1px)',
+              backgroundSize: '44px 22px',
+              backgroundColor: 'rgba(74,14,78,0.55)',
+            }}
+          />
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 relative">
             <div className="space-y-3 text-center md:text-left max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal-sm text-xs font-bold text-[#FFE9FF]">
-                <Sparkles className="w-3.5 h-3.5 fill-[#FFB347]" />
-                <span>GTZAN CONVOLUTIONAL AUDIO CLASSIFIER</span>
-              </div>
-
-              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-display tracking-tight text-[#FFE9FF] leading-none uppercase">
-                NEON RADIO
-              </h1>
-
-              <p className="text-base sm:text-lg font-bold text-[#FFE9FF] leading-snug">
-                Tell your tunes what you&apos;re jamming on. Drop any audio track to unpack its Mel-frequency spectral identity across 10 musical genres.
+              <p className="text-xs sm:text-sm font-bold tracking-[0.35em] text-[#FFE9FF] uppercase">
+                Neon Radio &middot; Genre Scan
               </p>
-            </div>
-
-            {/* Mascot in Hero */}
-            <div className="shrink-0 flex items-center justify-center">
-              <div className="relative">
-                <NeonLogo size={180} variant="jamming" className="hover:scale-105 transition-transform" />
-                <span className="absolute -top-2 -right-4 font-display text-sm bg-[#FF3CAC] text-[#1A0536] px-3 py-1 rounded-full border-2 border-[#FF3CAC] shadow-brutal-sm rotate-6">
-                  PLAY IT LOUD!
-                </span>
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-display italic tracking-tight leading-none uppercase text-transparent bg-clip-text bg-gradient-to-b from-[#FFE9FF] to-[#FF3CAC]">
+                Drop a track
+              </h1>
+              <p className="text-base sm:text-lg font-bold text-[#FFE9FF]/90 leading-snug">
+                Upload audio to see which of 10 GTZAN genres the model hears, from Mel-spectrogram windows.
+              </p>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#FF3CAC] text-xs font-bold text-[#FFE9FF] bg-[#14032A]/60">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>CNN CLASSIFIER</span>
               </div>
+            </div>
+            <div className="shrink-0 flex items-center justify-center">
+              <NeonLogo size={260} className="drop-shadow-[0_0_40px_rgba(255,60,172,0.55)]" />
             </div>
           </div>
         </section>
