@@ -381,8 +381,8 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = ({ isBackendHealthy }) 
                 {!analysisResult.prediction.is_calibrated && (
                   <span className="ml-1 text-[#C9A8E0]">
                     Raw uncalibrated neural activations across the 10 GTZAN categories.
-                    The bundled demo clips are short (12s) synthesized snippets outside the model's 30-second GTZAN
-                    training distribution - treat their scores as a pipeline demo, not a correctness claim.
+                    This clip is {analysisResult.track.duration_seconds.toFixed(1)}s long; the model was trained on 30-second GTZAN excerpts,
+                    so scores for other lengths or non-GTZAN audio are less reliable and are not a correctness claim.
                     Measured held-out GTZAN test accuracy: 49.5% (see ml/reports/evaluation_report.md).
                   </span>
                 )}
