@@ -28,16 +28,16 @@ export const AboutPage: React.FC = () => {
   }, [])
 
   const genres = [
-    { name: 'Blues', desc: 'Dominant 7th progressions, shuffle rhythms, acoustic and electric slide guitars.', color: 'bg-[#FFB347]' },
-    { name: 'Classical', desc: 'Complex polyphony, wide dynamic range, acoustic orchestral and chamber instrumentation.', color: 'bg-[#FF3CAC]' },
-    { name: 'Country', desc: 'String band acoustic timbres, twangy guitar, pedal steel, narrative vocal structures.', color: 'bg-[#3DFFD0]' },
-    { name: 'Disco', desc: 'Four-on-the-floor kick pattern, syncopated electric basslines, rhythm guitar chops.', color: 'bg-[#FFB347]' },
-    { name: 'Hip-Hop', desc: 'Heavy sub-bass, 808/acoustic drum breaks, syncopated vocal cadence, sampled hooks.', color: 'bg-[#FF3CAC]' },
-    { name: 'Jazz', desc: 'Extended 7th/9th/11th chord harmonies, swing syncopation, improvisational phrasing.', color: 'bg-[#3DFFD0]' },
-    { name: 'Metal', desc: 'High-gain harmonic distortion, palm-muted power riffs, rapid double-kick percussion.', color: 'bg-[#FFB347]' },
-    { name: 'Pop', desc: 'Catchy melodic hooks, polished vocal-centric mix, structured verse-chorus arrangements.', color: 'bg-[#FF3CAC]' },
-    { name: 'Reggae', desc: 'Accented offbeat skank guitar/keys, prominent dub bassline, rim-click percussion.', color: 'bg-[#3DFFD0]' },
-    { name: 'Rock', desc: 'Overdriven guitar riffs, 4/4 driving drum beat, verse-chorus dynamic energy.', color: 'bg-[#FFB347]' },
+    { name: 'Blues', desc: 'Dominant 7th progressions, shuffle rhythms, acoustic and electric slide guitars.', color: 'bg-[#2A0A4A]' },
+    { name: 'Classical', desc: 'Complex polyphony, wide dynamic range, acoustic orchestral and chamber instrumentation.', color: 'bg-[#2A0A4A]' },
+    { name: 'Country', desc: 'String band acoustic timbres, twangy guitar, pedal steel, narrative vocal structures.', color: 'bg-[#2A0A4A]' },
+    { name: 'Disco', desc: 'Four-on-the-floor kick pattern, syncopated electric basslines, rhythm guitar chops.', color: 'bg-[#2A0A4A]' },
+    { name: 'Hip-Hop', desc: 'Heavy sub-bass, 808/acoustic drum breaks, syncopated vocal cadence, sampled hooks.', color: 'bg-[#2A0A4A]' },
+    { name: 'Jazz', desc: 'Extended 7th/9th/11th chord harmonies, swing syncopation, improvisational phrasing.', color: 'bg-[#2A0A4A]' },
+    { name: 'Metal', desc: 'High-gain harmonic distortion, palm-muted power riffs, rapid double-kick percussion.', color: 'bg-[#2A0A4A]' },
+    { name: 'Pop', desc: 'Catchy melodic hooks, polished vocal-centric mix, structured verse-chorus arrangements.', color: 'bg-[#2A0A4A]' },
+    { name: 'Reggae', desc: 'Accented offbeat skank guitar/keys, prominent dub bassline, rim-click percussion.', color: 'bg-[#2A0A4A]' },
+    { name: 'Rock', desc: 'Overdriven guitar riffs, 4/4 driving drum beat, verse-chorus dynamic energy.', color: 'bg-[#2A0A4A]' },
   ]
 
   return (
@@ -79,21 +79,21 @@ export const AboutPage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div className="p-5 rounded-2xl bg-[#FFB347] border-2 border-[#FF3CAC] shadow-brutal">
+            <div className="p-5 rounded-2xl bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal">
               <span className="text-xs font-mono font-bold text-[#FFE9FF]/70 uppercase block mb-1">
                 Audio Tracks
               </span>
               <span className="text-4xl font-display text-[#FFE9FF]">1,000 TRACKS</span>
               <span className="text-xs font-medium text-[#FFE9FF] block mt-1">100 excerpts per musical genre</span>
             </div>
-            <div className="p-5 rounded-2xl bg-[#FF3CAC] border-2 border-[#FF3CAC] shadow-brutal">
+            <div className="p-5 rounded-2xl bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal">
               <span className="text-xs font-mono font-bold text-[#FFE9FF]/70 uppercase block mb-1">
                 Clip Length
               </span>
               <span className="text-4xl font-display text-[#FFE9FF]">30.0 SECONDS</span>
               <span className="text-xs font-medium text-[#FFE9FF] block mt-1">Single continuous excerpt</span>
             </div>
-            <div className="p-5 rounded-2xl bg-[#3DFFD0] border-2 border-[#FF3CAC] shadow-brutal">
+            <div className="p-5 rounded-2xl bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal">
               <span className="text-xs font-mono font-bold text-[#FFE9FF]/70 uppercase block mb-1">
                 Sampling Rate
               </span>
@@ -196,11 +196,11 @@ export const AboutPage: React.FC = () => {
 
           <div className="bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal rounded-2xl p-6 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-              <div className="p-4 rounded-xl bg-[#FFB347] border-2 border-[#FF3CAC]">
+              <div className="p-4 rounded-xl bg-[#1A0536] border-2 border-[#FF3CAC]">
                 <span className="text-[#FFE9FF]/70 font-bold block mb-1">Input Spectrogram Shape</span>
                 <strong className="text-lg font-bold text-[#FFE9FF]">(Batch, 1, 128, T)</strong>
               </div>
-              <div className="p-4 rounded-xl bg-[#FF3CAC] border-2 border-[#FF3CAC]">
+              <div className="p-4 rounded-xl bg-[#1A0536] border-2 border-[#FF3CAC]">
                 <span className="text-[#FFE9FF]/70 font-bold block mb-1">Trainable Parameters</span>
                 <strong className="text-lg font-bold text-[#FFE9FF]">
                   {modelInfo?.parameters_total ? modelInfo.parameters_total.toLocaleString() : '422,506'}
@@ -252,7 +252,7 @@ export const AboutPage: React.FC = () => {
             </h2>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#FFB347] border-2 border-[#FF3CAC] shadow-brutal space-y-3 text-xs text-[#1A0536] font-medium leading-relaxed">
+          <div className="p-6 rounded-2xl bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal space-y-3 text-xs text-[#FFE9FF] font-medium leading-relaxed">
             <p>
               <strong>1. GTZAN Historical Label Noise:</strong> Several musicology studies have noted occasional mislabeled tracks, artist repetitions across folds, and low-fidelity compression artifacts in the original 2001 GTZAN corpus.
             </p>
