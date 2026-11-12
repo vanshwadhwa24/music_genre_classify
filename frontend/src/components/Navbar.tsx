@@ -37,7 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b-2 border-[#FF3CAC] bg-[#FFB347] shadow-sm">
+    <header className="sticky top-0 z-50 w-full border-b-2 border-[#FF3CAC]/60 bg-[#14032A]/90 backdrop-blur shadow-[0_2px_24px_rgba(255,60,172,0.25)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between">
         {/* Brand Wordmark & Mascot */}
         <div
@@ -77,7 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className={`flex items-center gap-2 px-5 py-2 rounded-xl text-sm font-bold transition-all ${
                   isActive
                     ? 'bg-[#FF3CAC] text-[#1A0536] border-2 border-[#FF3CAC] shadow-brutal-sm translate-x-[-1px] translate-y-[-1px]'
-                    : 'text-[#1A0536] hover:bg-[#1A0536]'
+                    : 'text-[#FFE9FF]/80 hover:bg-[#FF3CAC]/20'
                 }`}
                 aria-current={isActive ? 'page' : undefined}
               >
