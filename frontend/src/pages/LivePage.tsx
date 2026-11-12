@@ -100,7 +100,7 @@ export const LivePage: React.FC<LivePageProps> = ({ isBackendHealthy }) => {
     <div className="w-full">
       {/* Playful Ticker Banner */}
       <MarqueeBanner
-        text="★ LIVE ACOUSTIC RADAR ★ REAL-TIME MICROPHONE LISTENING ★ ROLLING 2.5S AUDIO WINDOWS ★"
+        text="★ LIVE ACOUSTIC RADAR ★ MICROPHONE LISTENING ★ ROLLING 2.5S AUDIO WINDOWS ★"
         bg="bg-[#14032A]"
       />
 

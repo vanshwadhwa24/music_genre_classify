@@ -126,7 +126,7 @@ export const App: React.FC = () => {
       </main>
 
       {/* Playful Editorial Footer */}
-      <footer className="border-t-2 border-[#FF3CAC] bg-[#FFB347] py-8 px-4 text-xs font-bold text-[#1A0536]">
+      <footer className="border-t-2 border-[#FF3CAC] bg-[#14032A] py-8 px-4 text-xs font-bold text-[#FFE9FF]">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal-sm flex items-center justify-center overflow-hidden">
@@ -137,7 +137,7 @@ export const App: React.FC = () => {
                 NEON RADIO
               </span>
               <span className="text-[11px] font-mono text-[#FFE9FF]/80">
-                SOUND, MADE VISIBLE · GTZAN CNN PWA
+                GTZAN CNN PWA
               </span>
             </div>
           </div>
@@ -146,10 +146,10 @@ export const App: React.FC = () => {
             <span className="bg-[#2A0A4A] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
               PYTORCH 2D-CNN
             </span>
-            <span className="bg-[#FF3CAC] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
+            <span className="bg-[#FF3CAC] text-[#1A0536] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
               22.05 KHZ MONO
             </span>
-            <span className="bg-[#3DFFD0] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
+            <span className="bg-[#3DFFD0] text-[#1A0536] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
               128 MEL BANDS
             </span>
             <span className="bg-[#2A0A4A] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
