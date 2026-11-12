@@ -43,7 +43,7 @@ export const AboutPage: React.FC = () => {
   return (
     <div className="w-full">
       {/* Editorial Header Section */}
-      <section className="bg-[#3DFFD0] border-b-2 border-[#FF3CAC] pt-10 pb-8 px-4 sm:px-6">
+      <section className="bg-gradient-to-b from-[#14032A] to-[#4A0E4E] border-b-2 border-[#FF3CAC] pt-10 pb-8 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#FFE9FF] bg-[#2A0A4A] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm inline-block">

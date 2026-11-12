@@ -214,7 +214,7 @@ export const LivePage: React.FC<LivePageProps> = ({ isBackendHealthy }) => {
             ) : (
               <button
                 onClick={handleStopListening}
-                className="flex items-center gap-3 px-9 py-4 rounded-2xl bg-[#1A0536] hover:bg-[#FF6B8A] hover:text-white text-[#1A0536] text-base font-display tracking-wide border-2 border-[#FF3CAC] shadow-brutal transition-all brutal-btn"
+                className="flex items-center gap-3 px-9 py-4 rounded-2xl bg-[#1A0536] hover:bg-[#FF6B8A] hover:text-white text-[#FFE9FF] text-base font-display tracking-wide border-2 border-[#FF3CAC] shadow-brutal transition-all brutal-btn"
               >
                 <Square className="w-5 h-5 fill-current" />
                 <span>STOP LISTENING</span>
