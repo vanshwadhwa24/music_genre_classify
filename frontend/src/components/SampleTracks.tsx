@@ -19,7 +19,7 @@ export const SAMPLE_TRACKS: SampleTrackItem[] = [
     url: '/samples/rock_sample.wav',
     filename: 'sample_rock.wav',
     description: 'Electric guitar harmonics, distortion clipping & driving snare transient',
-    cardBg: 'bg-[#FFDF43]',
+    cardBg: 'bg-[#FFB347]',
   },
   {
     id: 'classical',
@@ -28,7 +28,7 @@ export const SAMPLE_TRACKS: SampleTrackItem[] = [
     url: '/samples/classical_sample.wav',
     filename: 'sample_classical.wav',
     description: 'Sustained chord progression with vibrato and orchestral decay',
-    cardBg: 'bg-[#F49ACB]',
+    cardBg: 'bg-[#FF3CAC]',
   },
   {
     id: 'jazz',
@@ -37,7 +37,7 @@ export const SAMPLE_TRACKS: SampleTrackItem[] = [
     url: '/samples/jazz_sample.wav',
     filename: 'sample_jazz.wav',
     description: 'Acoustic upright bassline, syncopated electric piano and ride tap',
-    cardBg: 'bg-[#8CA4E8]',
+    cardBg: 'bg-[#3DFFD0]',
   },
 ]
 
@@ -48,17 +48,17 @@ interface SampleTracksProps {
 
 export const SampleTracks: React.FC<SampleTracksProps> = ({ onSelectSample, disabled = false }) => {
   return (
-    <div className="bg-[#FFFDF7] border-2 border-[#4B2B23] shadow-brutal rounded-2xl p-6">
+    <div className="bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal rounded-2xl p-6">
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2.5">
-          <span className="w-8 h-8 rounded-lg bg-[#FFDF43] border-2 border-[#4B2B23] shadow-brutal-sm flex items-center justify-center text-[#4B2B23]">
+          <span className="w-8 h-8 rounded-lg bg-[#FFB347] border-2 border-[#FF3CAC] shadow-brutal-sm flex items-center justify-center text-[#1A0536]">
             <Radio className="w-4 h-4" />
           </span>
           <div>
-            <h3 className="text-lg font-display tracking-tight text-[#4B2B23]">
+            <h3 className="text-lg font-display tracking-tight text-[#FFE9FF]">
               WHAT ARE YOU JAMMING ON?
             </h3>
-            <p className="text-xs text-[#7A5247] font-medium">
+            <p className="text-xs text-[#C9A8E0] font-medium">
               Pick a synthesized demonstration track from the crate to test the live pipeline (12s clips, outside the 30s GTZAN training data - scores are a demo, not an accuracy claim)
             </p>
           </div>
@@ -69,18 +69,18 @@ export const SampleTracks: React.FC<SampleTracksProps> = ({ onSelectSample, disa
         {SAMPLE_TRACKS.map((sample) => (
           <div
             key={sample.id}
-            className={`flex flex-col justify-between p-4 rounded-xl border-2 border-[#4B2B23] shadow-brutal-sm transition-all hover:translate-y-[-2px] hover:shadow-brutal ${sample.cardBg}`}
+            className={`flex flex-col justify-between p-4 rounded-xl border-2 border-[#FF3CAC] shadow-brutal-sm transition-all hover:translate-y-[-2px] hover:shadow-brutal ${sample.cardBg}`}
           >
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-base font-bold text-[#4B2B23] leading-snug">
+                <span className="text-base font-bold text-[#FFE9FF] leading-snug">
                   {sample.name}
                 </span>
-                <span className="text-xs font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-white text-[#4B2B23] border-2 border-[#4B2B23]">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#2A0A4A] text-[#FFE9FF] border-2 border-[#FF3CAC]">
                   {sample.genre}
                 </span>
               </div>
-              <p className="text-xs text-[#4B2B23]/80 leading-relaxed font-medium mb-4">
+              <p className="text-xs text-[#FFE9FF]/80 leading-relaxed font-medium mb-4">
                 {sample.description}
               </p>
             </div>
@@ -88,7 +88,7 @@ export const SampleTracks: React.FC<SampleTracksProps> = ({ onSelectSample, disa
             <button
               onClick={() => onSelectSample(sample)}
               disabled={disabled}
-              className="w-full py-2 px-3 rounded-lg bg-white hover:bg-[#4B2B23] text-[#4B2B23] hover:text-white border-2 border-[#4B2B23] shadow-brutal-sm text-xs font-bold tracking-wide flex items-center justify-center gap-2 transition-all active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-50"
+              className="w-full py-2 px-3 rounded-lg bg-[#2A0A4A] hover:bg-[#FF3CAC] text-[#FFE9FF] hover:text-white border-2 border-[#FF3CAC] shadow-brutal-sm text-xs font-bold tracking-wide flex items-center justify-center gap-2 transition-all active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-50"
             >
               <Disc className="w-3.5 h-3.5" />
               <span>JAM WITH THIS</span>

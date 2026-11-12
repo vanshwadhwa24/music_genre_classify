@@ -20,15 +20,15 @@ export const SpectrogramView: React.FC<SpectrogramViewProps> = ({ spectrogram, t
   }
 
   return (
-    <div className="bg-white border-2 border-[#4B2B23] shadow-brutal rounded-2xl overflow-hidden">
+    <div className="bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal rounded-2xl overflow-hidden">
       {/* Editorial Header */}
-      <div className="flex items-center justify-between px-5 py-3.5 border-b-2 border-[#4B2B23] bg-[#FFDF43]">
+      <div className="flex items-center justify-between px-5 py-3.5 border-b-2 border-[#FF3CAC] bg-[#FFB347]">
         <div className="flex items-center gap-2.5">
-          <Activity className="w-4 h-4 text-[#4B2B23]" />
-          <span className="text-sm font-display uppercase tracking-wide text-[#4B2B23]">
+          <Activity className="w-4 h-4 text-[#FFE9FF]" />
+          <span className="text-sm font-display uppercase tracking-wide text-[#FFE9FF]">
             MEL-SPECTROGRAM FREQUENCY MAP
           </span>
-          <span className="hidden sm:inline-block text-xs font-bold text-[#4B2B23]/70">
+          <span className="hidden sm:inline-block text-xs font-bold text-[#FFE9FF]/70">
             — {title}
           </span>
         </div>
@@ -36,7 +36,7 @@ export const SpectrogramView: React.FC<SpectrogramViewProps> = ({ spectrogram, t
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="p-1.5 rounded-lg bg-white hover:bg-[#F49ACB] text-[#4B2B23] border-2 border-[#4B2B23] shadow-brutal-sm transition-all active:translate-x-0.5 active:translate-y-0.5"
+            className="p-1.5 rounded-lg bg-[#2A0A4A] hover:bg-[#FF3CAC] text-[#1A0536] border-2 border-[#FF3CAC] shadow-brutal-sm transition-all active:translate-x-0.5 active:translate-y-0.5"
             title={isExpanded ? 'Minimize view' : 'Expand full view'}
             aria-label={isExpanded ? 'Minimize view' : 'Expand full view'}
           >
@@ -44,7 +44,7 @@ export const SpectrogramView: React.FC<SpectrogramViewProps> = ({ spectrogram, t
           </button>
           <button
             onClick={handleDownload}
-            className="p-1.5 rounded-lg bg-white hover:bg-[#8CA4E8] text-[#4B2B23] border-2 border-[#4B2B23] shadow-brutal-sm transition-all active:translate-x-0.5 active:translate-y-0.5"
+            className="p-1.5 rounded-lg bg-[#2A0A4A] hover:bg-[#3DFFD0] text-[#1A0536] border-2 border-[#FF3CAC] shadow-brutal-sm transition-all active:translate-x-0.5 active:translate-y-0.5"
             title="Download spectrogram image"
             aria-label="Download spectrogram image"
           >
@@ -55,32 +55,32 @@ export const SpectrogramView: React.FC<SpectrogramViewProps> = ({ spectrogram, t
 
       {/* Image container */}
       <div
-        className={`relative bg-[#4B2B23] p-3 flex items-center justify-center transition-all ${
+        className={`relative bg-[#FF3CAC] p-3 flex items-center justify-center transition-all ${
           isExpanded ? 'min-h-[480px]' : 'min-h-[260px]'
         }`}
       >
         <img
           src={imageSrc}
           alt="Mel-spectrogram visualizing time vs frequency intensity in decibels"
-          className="w-full h-auto rounded-xl object-contain max-h-[550px] border-2 border-[#4B2B23]"
+          className="w-full h-auto rounded-xl object-contain max-h-[550px] border-2 border-[#FF3CAC]"
           loading="lazy"
         />
       </div>
 
       {/* Axis metadata footer */}
-      <div className="px-5 py-3 bg-[#FFFDF7] border-t-2 border-[#4B2B23] flex flex-wrap items-center justify-between gap-3 text-xs text-[#4B2B23] font-mono">
+      <div className="px-5 py-3 bg-[#2A0A4A] border-t-2 border-[#FF3CAC] flex flex-wrap items-center justify-between gap-3 text-xs text-[#FFE9FF] font-mono">
         <div className="flex items-center gap-4">
-          <span className="bg-[#FFF9E9] px-2.5 py-1 rounded-md border border-[#4B2B23]">
+          <span className="bg-[#1A0536] px-2.5 py-1 rounded-md border border-[#FF3CAC]">
             Mel Bands: <strong>{spectrogram.n_mels}</strong>
           </span>
-          <span className="bg-[#FFF9E9] px-2.5 py-1 rounded-md border border-[#4B2B23]">
+          <span className="bg-[#1A0536] px-2.5 py-1 rounded-md border border-[#FF3CAC]">
             Hop Length: <strong>{spectrogram.hop_length}</strong>
           </span>
-          <span className="bg-[#FFF9E9] px-2.5 py-1 rounded-md border border-[#4B2B23]">
+          <span className="bg-[#1A0536] px-2.5 py-1 rounded-md border border-[#FF3CAC]">
             Frames: <strong>{spectrogram.time_steps}</strong>
           </span>
         </div>
-        <div className="flex items-center gap-1.5 font-bold text-[#7A5247]">
+        <div className="flex items-center gap-1.5 font-bold text-[#C9A8E0]">
           <Info className="w-3.5 h-3.5" />
           <span>X: Time (s) · Y: Frequency (Hz) · Color: Power (dB)</span>
         </div>

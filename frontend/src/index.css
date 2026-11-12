@@ -1,46 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --color-brand-yellow: #FFDF43;
-  --color-brand-pink: #F49ACB;
-  --color-brand-brown: #4B2B23;
-  --color-brand-periwinkle: #8CA4E8;
-  --color-brand-cream: #FFF9E9;
+  --color-brand-yellow: #FFB347;
+  --color-brand-pink: #FF3CAC;
+  --color-brand-brown: #FF3CAC;
+  --color-brand-periwinkle: #3DFFD0;
+  --color-brand-cream: #1A0536;
   --color-brand-white: #FFFFFF;
 
-  --color-background: #FFF9E9;
+  --color-background: #1A0536;
   --color-surface: #FFFFFF;
   --color-surface-elevated: #FFFDF7;
-  --color-border: #4B2B23;
-  --color-text-primary: #4B2B23;
+  --color-border: #FF3CAC;
+  --color-text-primary: #FF3CAC;
   --color-text-secondary: #7A5247;
-  --color-accent-primary: #FFDF43;
-  --color-accent-secondary: #F49ACB;
-  --color-audio-highlight: #8CA4E8;
+  --color-accent-primary: #FFB347;
+  --color-accent-secondary: #FF3CAC;
+  --color-audio-highlight: #3DFFD0;
 
   --color-success: #288C56;
   --color-warning: #E68A00;
   --color-error: #E5484D;
 
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 @theme {
-  --font-display: 'Anton', -apple-system, sans-serif;
+  --font-display: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
   --font-mono: 'Space Mono', monospace;
 
-  --color-brand-yellow: #FFDF43;
-  --color-brand-pink: #F49ACB;
-  --color-brand-brown: #4B2B23;
-  --color-brand-periwinkle: #8CA4E8;
-  --color-brand-cream: #FFF9E9;
+  --color-brand-yellow: #FFB347;
+  --color-brand-pink: #FF3CAC;
+  --color-brand-brown: #FF3CAC;
+  --color-brand-periwinkle: #3DFFD0;
+  --color-brand-cream: #1A0536;
 }
 
 .font-display {
-  font-family: 'Anton', -apple-system, sans-serif;
-  letter-spacing: -0.01em;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
 }
 
 .font-sans-body {
@@ -53,30 +56,30 @@
 
 /* Playful Neo-Editorial brutalist-soft offset shadows */
 .brutal-shadow {
-  box-shadow: 4px 4px 0px #4B2B23;
+  box-shadow: 0 0 22px #FF3CAC55;
 }
 
 .brutal-shadow-sm {
-  box-shadow: 2px 2px 0px #4B2B23;
+  box-shadow: 0 0 12px #FF3CAC55;
 }
 
 .brutal-shadow-lg {
-  box-shadow: 6px 6px 0px #4B2B23;
+  box-shadow: 0 0 34px #FF3CAC66;
 }
 
 .brutal-btn {
   transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 3px 3px 0px #4B2B23;
+  box-shadow: 0 0 16px #FF3CAC66;
 }
 
 .brutal-btn:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 4px 4px 0px #4B2B23;
+  transform: translateY(-1px);
+  box-shadow: 0 0 26px #FF3CACAA;
 }
 
 .brutal-btn:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0px #4B2B23;
+  transform: translateY(1px);
+  box-shadow: 0 0 10px #FF3CAC88;
 }
 
 /* Ticker Marquee Animation */
@@ -105,21 +108,21 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #FFF9E9;
-  border-left: 2px solid #4B2B23;
+  background: #1A0536;
+  border-left: 2px solid #FF3CAC;
 }
 ::-webkit-scrollbar-thumb {
-  background: #FFDF43;
-  border: 2px solid #4B2B23;
+  background: #FFB347;
+  border: 2px solid #FF3CAC;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #F49ACB;
+  background: #FF3CAC;
 }
 
 /* Accessible focus ring */
 :focus-visible {
-  outline: 3px solid #4B2B23;
+  outline: 3px solid #3DFFD0;
   outline-offset: 2px;
 }
 
@@ -131,4 +134,28 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Neon radio canvas: sunset gradient with a perspective grid at the foot of the page */
+body {
+  margin: 0;
+  background-color: #1A0536;
+  background-image:
+    linear-gradient(#1A0536 0%, #2C0A4E 70%, #3A0A5E 100%);
+  background-attachment: fixed;
+  color: #FFE9FF;
+}
+body::after {
+  content: '';
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  height: 26vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .5;
+  background-image:
+    repeating-linear-gradient(90deg, #FF3CAC55 0 1px, transparent 1px 48px),
+    repeating-linear-gradient(#FF3CAC55 0 1px, transparent 1px 32px);
+  -webkit-mask-image: linear-gradient(transparent, #000);
+  mask-image: linear-gradient(transparent, #000);
 }

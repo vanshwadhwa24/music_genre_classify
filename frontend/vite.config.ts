@@ -12,11 +12,11 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.png', 'samples/*.wav'],
       manifest: {
-        name: 'Music Genre Classifier',
-        short_name: 'Genre Classifier',
+        name: 'Neon Radio',
+        short_name: 'Neon Radio',
         description: 'Sound, made visible. Audio track and real-time live genre classification powered by CNN.',
-        theme_color: '#080B12',
-        background_color: '#080B12',
+        theme_color: '#1A0536',
+        background_color: '#1A0536',
         display: 'standalone',
         orientation: 'portrait',
         icons: [

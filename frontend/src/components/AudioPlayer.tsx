@@ -99,7 +99,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, autoPlay =
   }
 
   return (
-    <div className="bg-[#FFFDF7] border-2 border-[#4B2B23] shadow-brutal rounded-2xl p-5">
+    <div className="bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal rounded-2xl p-5">
       <audio
         ref={audioRef}
         src={audioUrl}
@@ -111,15 +111,15 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, autoPlay =
       />
 
       {/* Player Header */}
-      <div className="flex items-center justify-between mb-4 pb-3 border-b-2 border-[#4B2B23]/20">
+      <div className="flex items-center justify-between mb-4 pb-3 border-b-2 border-[#FF3CAC]/20">
         <div className="flex items-center gap-2">
-          <Disc3 className={`w-4 h-4 text-[#4B2B23] ${isPlaying ? 'animate-spin' : ''}`} />
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#4B2B23]">
+          <Disc3 className={`w-4 h-4 text-[#FFE9FF] ${isPlaying ? 'animate-spin' : ''}`} />
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FFE9FF]">
             TAPE PLAYBACK DECK
           </span>
         </div>
         {title && (
-          <span className="text-xs font-bold text-[#4B2B23] bg-[#FFDF43] px-2.5 py-0.5 rounded-full border border-[#4B2B23] truncate max-w-[240px]">
+          <span className="text-xs font-bold text-[#1A0536] bg-[#FFB347] px-2.5 py-0.5 rounded-full border border-[#FF3CAC] truncate max-w-[240px]">
             {title}
           </span>
         )}
@@ -128,7 +128,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, autoPlay =
       <div className="flex flex-col gap-3.5">
         {/* Scrubber slider */}
         <div className="flex items-center gap-3">
-          <span className="text-xs font-mono font-bold text-[#4B2B23] w-10 text-right">
+          <span className="text-xs font-mono font-bold text-[#FFE9FF] w-10 text-right">
             {formatTime(currentTime)}
           </span>
           <div className="flex-1 relative flex items-center">
@@ -140,10 +140,10 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, autoPlay =
               value={currentTime}
               onChange={handleSeek}
               aria-label="Audio playback seeker"
-              className="w-full h-2.5 bg-[#FFF9E9] border-2 border-[#4B2B23] rounded-lg appearance-none cursor-pointer accent-[#4B2B23] focus:outline-none"
+              className="w-full h-2.5 bg-[#1A0536] border-2 border-[#FF3CAC] rounded-lg appearance-none cursor-pointer accent-[#FF3CAC] focus:outline-none"
             />
           </div>
-          <span className="text-xs font-mono font-bold text-[#4B2B23] w-10">
+          <span className="text-xs font-mono font-bold text-[#FFE9FF] w-10">
             {formatTime(duration)}
           </span>
         </div>
@@ -153,7 +153,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, autoPlay =
           <div className="flex items-center gap-3">
             <button
               onClick={togglePlay}
-              className="w-11 h-11 rounded-xl bg-[#F49ACB] hover:bg-[#FFDF43] text-[#4B2B23] border-2 border-[#4B2B23] shadow-brutal-sm flex items-center justify-center transition-all active:translate-x-0.5 active:translate-y-0.5"
+              className="w-11 h-11 rounded-xl bg-[#FF3CAC] hover:bg-[#FFB347] text-[#1A0536] border-2 border-[#FF3CAC] shadow-brutal-sm flex items-center justify-center transition-all active:translate-x-0.5 active:translate-y-0.5"
               aria-label={isPlaying ? 'Pause track' : 'Play track'}
             >
               {isPlaying ? (
@@ -165,7 +165,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, autoPlay =
 
             <button
               onClick={handleRestart}
-              className="w-9 h-9 rounded-xl bg-[#FFF9E9] hover:bg-[#8CA4E8] text-[#4B2B23] border-2 border-[#4B2B23] shadow-brutal-sm flex items-center justify-center transition-all active:translate-x-0.5 active:translate-y-0.5"
+              className="w-9 h-9 rounded-xl bg-[#1A0536] hover:bg-[#3DFFD0] text-[#1A0536] border-2 border-[#FF3CAC] shadow-brutal-sm flex items-center justify-center transition-all active:translate-x-0.5 active:translate-y-0.5"
               title="Restart from beginning"
               aria-label="Restart audio track"
             >
@@ -173,13 +173,13 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, autoPlay =
             </button>
           </div>
 
-          <div className="flex items-center gap-2 bg-[#FFF9E9] border-2 border-[#4B2B23] px-3 py-1.5 rounded-xl">
+          <div className="flex items-center gap-2 bg-[#1A0536] border-2 border-[#FF3CAC] px-3 py-1.5 rounded-xl">
             <button
               onClick={toggleMute}
-              className="text-[#4B2B23] hover:text-[#E5484D] transition-colors"
+              className="text-[#FFE9FF] hover:text-[#FF6B8A] transition-colors"
               aria-label={isMuted ? 'Unmute' : 'Mute'}
             >
-              {isMuted ? <VolumeX className="w-4 h-4 text-[#E5484D]" /> : <Volume2 className="w-4 h-4" />}
+              {isMuted ? <VolumeX className="w-4 h-4 text-[#FF6B8A]" /> : <Volume2 className="w-4 h-4" />}
             </button>
             <input
               type="range"
@@ -189,7 +189,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, title, autoPlay =
               value={isMuted ? 0 : volume}
               onChange={handleVolumeChange}
               aria-label="Volume level"
-              className="w-16 h-1.5 bg-[#FFFDF7] border border-[#4B2B23] rounded appearance-none cursor-pointer accent-[#4B2B23]"
+              className="w-16 h-1.5 bg-[#2A0A4A] border border-[#FF3CAC] rounded appearance-none cursor-pointer accent-[#FF3CAC]"
             />
           </div>
         </div>

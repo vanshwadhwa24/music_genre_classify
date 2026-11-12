@@ -44,7 +44,7 @@ export const LiveVisualizerCanvas: React.FC<LiveVisualizerCanvasProps> = ({
       ctx.scale(dpr, dpr)
 
       // Background: Warm Cream / Butter Yellow
-      ctx.fillStyle = '#FFFDF7'
+      ctx.fillStyle = '#2A0A4A'
       ctx.fillRect(0, 0, width, height)
 
       const centerX = width / 2
@@ -75,18 +75,18 @@ export const LiveVisualizerCanvas: React.FC<LiveVisualizerCanvasProps> = ({
       // 1. Outer Turntable Ring / Vinyl Border
       ctx.beginPath()
       ctx.arc(centerX, centerY, baseRadius * 1.38, 0, Math.PI * 2)
-      ctx.fillStyle = '#FFDF43'
+      ctx.fillStyle = '#FFB347'
       ctx.fill()
-      ctx.strokeStyle = '#4B2B23'
+      ctx.strokeStyle = '#FF3CAC'
       ctx.lineWidth = 4
       ctx.stroke()
 
       // Vinyl Record Body (Warm Cream inner groove)
       ctx.beginPath()
       ctx.arc(centerX, centerY, baseRadius * 1.34, 0, Math.PI * 2)
-      ctx.fillStyle = '#FFF9E9'
+      ctx.fillStyle = '#1A0536'
       ctx.fill()
-      ctx.strokeStyle = '#4B2B23'
+      ctx.strokeStyle = '#FF3CAC'
       ctx.lineWidth = 2
       ctx.stroke()
 
@@ -104,7 +104,7 @@ export const LiveVisualizerCanvas: React.FC<LiveVisualizerCanvasProps> = ({
         ctx.beginPath()
         ctx.moveTo(x1, y1)
         ctx.lineTo(x2, y2)
-        ctx.strokeStyle = (i % 4 === 0) ? '#4B2B23' : '#4B2B23'
+        ctx.strokeStyle = (i % 4 === 0) ? '#FF3CAC' : '#FF3CAC'
         ctx.lineWidth = (i % 4 === 0) ? 2.5 : 1.2
         ctx.stroke()
       }
@@ -114,7 +114,7 @@ export const LiveVisualizerCanvas: React.FC<LiveVisualizerCanvasProps> = ({
       grooveRadii.forEach((r, idx) => {
         ctx.beginPath()
         ctx.arc(centerX, centerY, r, 0, Math.PI * 2)
-        ctx.strokeStyle = '#4B2B23'
+        ctx.strokeStyle = '#FF3CAC'
         ctx.lineWidth = 1.5
         if (idx % 2 === 1) {
           ctx.setLineDash([4, 6])
@@ -158,7 +158,7 @@ export const LiveVisualizerCanvas: React.FC<LiveVisualizerCanvasProps> = ({
       // Fill and outline harmonic wave
       ctx.fillStyle = isActive ? 'rgba(244, 154, 203, 0.55)' : 'rgba(244, 154, 203, 0.35)'
       ctx.fill()
-      ctx.strokeStyle = '#4B2B23'
+      ctx.strokeStyle = '#FF3CAC'
       ctx.lineWidth = 3
       ctx.stroke()
 
@@ -189,7 +189,7 @@ export const LiveVisualizerCanvas: React.FC<LiveVisualizerCanvasProps> = ({
       ctx.closePath()
       ctx.fillStyle = isActive ? 'rgba(140, 164, 232, 0.4)' : 'rgba(140, 164, 232, 0.25)'
       ctx.fill()
-      ctx.strokeStyle = '#4B2B23'
+      ctx.strokeStyle = '#FF3CAC'
       ctx.lineWidth = 2.5
       ctx.stroke()
 
@@ -197,9 +197,9 @@ export const LiveVisualizerCanvas: React.FC<LiveVisualizerCanvasProps> = ({
       const coreRadius = (baseRadius * 0.38) * (1.0 + energy * 0.15)
       ctx.beginPath()
       ctx.arc(centerX, centerY, coreRadius, 0, Math.PI * 2)
-      ctx.fillStyle = '#FFDF43'
+      ctx.fillStyle = '#FFB347'
       ctx.fill()
-      ctx.strokeStyle = '#4B2B23'
+      ctx.strokeStyle = '#FF3CAC'
       ctx.lineWidth = 3
       ctx.stroke()
 
@@ -207,19 +207,19 @@ export const LiveVisualizerCanvas: React.FC<LiveVisualizerCanvasProps> = ({
       const spindleRadius = coreRadius * 0.22
       ctx.beginPath()
       ctx.arc(centerX, centerY, spindleRadius, 0, Math.PI * 2)
-      ctx.fillStyle = '#4B2B23'
+      ctx.fillStyle = '#FF3CAC'
       ctx.fill()
 
       // Center record label text / decorative stars
       ctx.save()
       ctx.translate(centerX, centerY)
       ctx.rotate(rot * 1.5)
-      ctx.fillStyle = '#4B2B23'
+      ctx.fillStyle = '#FF3CAC'
       ctx.font = 'bold 9px "Space Mono", monospace'
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
       if (coreRadius > 25) {
-        ctx.fillText('★ JAMBIRD ★', 0, -coreRadius * 0.55)
+        ctx.fillText('★ NEON RADIO ★', 0, -coreRadius * 0.55)
         ctx.fillText('45 RPM', 0, coreRadius * 0.55)
       }
       ctx.restore()
@@ -240,7 +240,7 @@ export const LiveVisualizerCanvas: React.FC<LiveVisualizerCanvasProps> = ({
 
   return (
     <div className="relative w-full max-w-[500px] aspect-square mx-auto flex items-center justify-center p-2">
-      <div className="w-full h-full rounded-full border-4 border-[#4B2B23] shadow-brutal-lg overflow-hidden bg-[#FFFDF7]">
+      <div className="w-full h-full rounded-full border-4 border-[#FF3CAC] shadow-brutal-lg overflow-hidden bg-[#2A0A4A]">
         <canvas
           ref={canvasRef}
           className="w-full h-full rounded-full cursor-default select-none pointer-events-none"
