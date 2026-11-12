@@ -149,13 +149,13 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = ({ isBackendHealthy }) 
       {/* 1. Playful Editorial Hero Section (Neon Radio style) */}
       {!analysisResult && (
         <section
-          className="border-b-2 border-[#FF3CAC] pt-10 pb-24 px-4 sm:px-6 relative overflow-hidden"
+          className="border-b-2 border-[#FF3CAC] pt-10 pb-44 px-4 sm:px-6 relative overflow-hidden"
           style={{ background: 'linear-gradient(180deg,#14032A 0%,#2A0A4A 60%,#4A0E4E 100%)' }}
         >
           {/* retro grid floor */}
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 bottom-0 h-40 pointer-events-none opacity-60"
+            className="absolute inset-x-0 bottom-0 h-32 pointer-events-none opacity-60"
             style={{
               backgroundImage:
                 'linear-gradient(rgba(255,60,172,0.55) 1px, transparent 1px), linear-gradient(90deg, rgba(255,60,172,0.45) 1px, transparent 1px)',
