@@ -65,7 +65,7 @@ export const AboutPage: React.FC = () => {
 
       <MarqueeBanner
         text="★ GTZAN 1,000 AUDIO TRACKS ★ 22,050 HZ SPECTRAL ANALYSIS ★ 4-STAGE 2D-CNN ★ 422,506 PARAMETERS ★"
-        bg="bg-[#FFB347]"
+        bg="bg-[#14032A]"
       />
 
       <div className="max-w-5xl mx-auto px-4 py-10 sm:py-14 space-y-12">

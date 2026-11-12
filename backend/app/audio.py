@@ -79,6 +79,20 @@ def process_audio_file(
     return y, mel_db, duration, analysis_id, png_bytes
 
 
+def _transcode_to_wav(data: bytes) -> bytes:
+    """Convert arbitrary browser audio bytes to mono WAV via ffmpeg (stdin to stdout)."""
+    import subprocess
+
+    proc = subprocess.run(
+        ["ffmpeg", "-loglevel", "error", "-i", "pipe:0", "-ac", "1",
+         "-ar", str(settings.sample_rate), "-f", "wav", "pipe:1"],
+        input=data, capture_output=True, timeout=20,
+    )
+    if proc.returncode != 0 or not proc.stdout:
+        raise ValueError("ffmpeg could not decode the audio buffer (is ffmpeg installed?)")
+    return proc.stdout
+
+
 def process_live_audio_chunk(
     chunk_bytes: bytes,
 ) -> Tuple[np.ndarray, np.ndarray, float]:
@@ -87,11 +101,20 @@ def process_live_audio_chunk(
     Returns:
         (signal, mel_spectrogram_db, rms_energy)
     """
-    y, duration = load_audio_from_bytes(
-        chunk_bytes,
-        target_sr=settings.sample_rate,
-        max_duration=settings.live_window_seconds,
-    )
+    try:
+        y, duration = load_audio_from_bytes(
+            chunk_bytes,
+            target_sr=settings.sample_rate,
+            max_duration=settings.live_window_seconds,
+        )
+    except Exception:
+        # Browser MediaRecorder output (webm/opus, ogg, mp4) is not readable by
+        # libsndfile; transcode to WAV with ffmpeg and retry.
+        y, duration = load_audio_from_bytes(
+            _transcode_to_wav(chunk_bytes),
+            target_sr=settings.sample_rate,
+            max_duration=settings.live_window_seconds,
+        )
 
     # Root Mean Square energy
     rms = float(np.sqrt(np.mean(y ** 2))) if len(y) > 0 else 0.0

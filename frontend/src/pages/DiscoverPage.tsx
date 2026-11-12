@@ -332,18 +332,18 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = ({ isBackendHealthy }) 
           /* Screen B: Results Mode (Playful Editorial celebration) */
           <div className="space-y-10 animate-fadeIn">
             {/* Results Title Banner */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-[#FFB347] border-2 border-[#FF3CAC] shadow-brutal rounded-2xl p-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-gradient-to-r from-[#2A0A4A] to-[#4A0E4E] border-2 border-[#FF3CAC] shadow-brutal rounded-2xl p-6">
               <div>
                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FFE9FF]">
                   ★ INFERENCE COMPLETE ★
                 </span>
                 <h2 className="text-3xl sm:text-4xl font-display tracking-tight text-[#FFE9FF] mt-0.5">
-                  THEY LOVE IT! MUSICAL IDENTITY REPORT
+                  GENRE REPORT
                 </h2>
               </div>
               <button
                 onClick={handleReset}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#2A0A4A] hover:bg-[#FF3CAC] text-xs font-bold text-[#1A0536] border-2 border-[#FF3CAC] shadow-brutal-sm transition-all brutal-btn"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#2A0A4A] hover:bg-[#FF3CAC] text-xs font-bold text-[#FFE9FF] border-2 border-[#FF3CAC] shadow-brutal-sm transition-all brutal-btn"
               >
                 <RotateCcw className="w-4 h-4" />
                 <span>JAM ANOTHER TRACK</span>
@@ -397,7 +397,7 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = ({ isBackendHealthy }) 
                 </h3>
                 <button
                   onClick={() => setShowAllGenres(!showAllGenres)}
-                  className="text-xs font-bold text-[#1A0536] bg-[#2A0A4A] hover:bg-[#FFB347] px-3 py-1.5 rounded-lg border-2 border-[#FF3CAC] shadow-brutal-sm transition-all"
+                  className="text-xs font-bold text-[#FFE9FF] bg-[#2A0A4A] hover:bg-[#FFB347] px-3 py-1.5 rounded-lg border-2 border-[#FF3CAC] shadow-brutal-sm transition-all"
                 >
                   {showAllGenres ? 'SHOW TOP 3 ONLY' : 'EXPAND ALL 10 GENRES'}
                 </button>

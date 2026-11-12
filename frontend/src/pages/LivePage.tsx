@@ -97,7 +97,7 @@ export const LivePage: React.FC<LivePageProps> = ({ isBackendHealthy }) => {
       {/* Playful Ticker Banner */}
       <MarqueeBanner
         text="★ LIVE ACOUSTIC RADAR ★ REAL-TIME MICROPHONE LISTENING ★ ROLLING 2.5S AUDIO WINDOWS ★"
-        bg="bg-[#FFB347]"
+        bg="bg-[#14032A]"
       />
 
       <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12 flex flex-col justify-between min-h-[calc(100vh-12rem)] space-y-8">
