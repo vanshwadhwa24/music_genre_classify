@@ -119,7 +119,7 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = ({ isBackendHealthy }) 
     if (!selectedFile) return
     setIsAnalyzing(true)
     setErrorMessage(null)
-    setAnalysisStepText('Extracting 128 Mel-frequency bands & running CNN...')
+    setAnalysisStepText('Analyzing audio with the upload model...')
 
     try {
       const result = await apiService.analyzeTrack(selectedFile)
@@ -172,11 +172,11 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = ({ isBackendHealthy }) 
                 Drop a track
               </h1>
               <p className="text-base sm:text-lg font-bold text-[#FFE9FF]/90 leading-snug">
-                Upload audio to see which of 10 GTZAN genres the model hears, from Mel-spectrogram windows.
+                Upload audio to see which of 10 GTZAN genres the model hears. Uploads use a pretrained audio model; live listening uses the lightweight CNN.
               </p>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#FF3CAC] text-xs font-bold text-[#FFE9FF] bg-[#14032A]/60">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>CNN CLASSIFIER</span>
+                <span>UPLOAD: CLAP PROBE &middot; LIVE: CNN</span>
               </div>
             </div>
             <div className="shrink-0 flex items-center justify-center">
@@ -214,7 +214,7 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = ({ isBackendHealthy }) 
                   DROP YOUR TRACK IN THE CRATE
                 </h2>
                 <p className="text-xs sm:text-sm text-[#C9A8E0] font-medium leading-relaxed">
-                  Support for WAV, MP3, OGG, M4A, FLAC up to 30 MB. Evaluates the 30-second GTZAN spectral window.
+                  Support for WAV, MP3, OGG, M4A, FLAC up to 30 MB. Analyzes up to the first 30 seconds of audio.
                 </p>
               </div>
 
@@ -249,7 +249,7 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = ({ isBackendHealthy }) 
                     <div className="space-y-1">
                       <p className="text-lg font-bold text-[#FFE9FF]">{analysisStepText}</p>
                       <p className="text-xs text-[#C9A8E0] font-mono font-bold">
-                        Computing 128 Mel bands · 22,050 Hz resampling
+                        Decoding audio · preparing model input
                       </p>
                     </div>
                   </div>
@@ -377,13 +377,21 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = ({ isBackendHealthy }) 
               </div>
 
               <div className="p-4 rounded-xl bg-[#1A0536] border-2 border-[#FF3CAC] text-xs text-[#FFE9FF] font-medium leading-relaxed">
-                Primary model activation: <strong className="font-mono font-bold text-sm">{analysisResult.prediction.top_three[0].percentage.toFixed(1)}%</strong> ({analysisResult.prediction.top_three[0].score.toFixed(4)} softmax score).
-                {!analysisResult.prediction.is_calibrated && (
+                Top score: <strong className="font-mono font-bold text-sm">{analysisResult.prediction.top_three[0].percentage.toFixed(1)}%</strong> ({analysisResult.prediction.top_three[0].score.toFixed(4)} {analysisResult.prediction.model_status === 'CLAP_LOGREG_UPLOAD' ? 'classifier probability' : 'softmax score'}).
+                {!analysisResult.prediction.is_calibrated && analysisResult.prediction.model_status === 'CLAP_LOGREG_UPLOAD' && (
+                  <span className="ml-1 text-[#C9A8E0]">
+                    Uncalibrated probabilities from a small classifier on top of a pretrained CLAP audio model, trained on our GTZAN split. Audio is decoded at 22.05 kHz, resampled to 48 kHz and cut into up to three 10-second clips.
+                    Held-out result: 88 of 101 test tracks correct (87.1%; 95% interval roughly 79-93%).
+                    It was measured on one split of GTZAN, which has duplicates and label noise, and CLAP's own pretraining data may overlap with GTZAN songs, so this is not proof of the same accuracy on new music.
+                    Best for full tracks: with only a few seconds of audio, accuracy was about 62-73% in our tests.
+                  </span>
+                )}
+                {!analysisResult.prediction.is_calibrated && analysisResult.prediction.model_status !== 'CLAP_LOGREG_UPLOAD' && (
                   <span className="ml-1 text-[#C9A8E0]">
                     Raw uncalibrated neural activations across the 10 GTZAN categories.
                     This clip is {analysisResult.track.duration_seconds.toFixed(1)}s long; the model was trained on 30-second GTZAN excerpts,
                     so scores for other lengths or non-GTZAN audio are less reliable and are not a correctness claim.
-                    Measured held-out GTZAN test accuracy: 49.5% (see ml/reports/evaluation_report.md).
+                    Measured held-out GTZAN test accuracy: 49.5% (see ml/reports/evaluation_report.md). This fallback CNN is used when the upload model is unavailable.
                   </span>
                 )}
               </div>

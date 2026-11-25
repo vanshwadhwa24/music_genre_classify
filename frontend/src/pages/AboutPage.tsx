@@ -5,6 +5,7 @@ import {
   Sliders,
   AlertTriangle,
   Music2,
+  Sparkles,
 } from 'lucide-react'
 
 import { apiService } from '../services/api'
@@ -53,7 +54,7 @@ export const AboutPage: React.FC = () => {
               HOW NEON RADIO HEARS SOUND
             </h1>
             <p className="text-sm sm:text-base font-bold text-[#FFE9FF] max-w-xl leading-relaxed">
-              From raw audio waveforms to 128 Mel-frequency spectrogram bins, powering a 4-stage convolutional neural network.
+              From raw audio to Mel-frequency spectrograms. Uploads use a pretrained CLAP audio model with a small classifier; live listening uses a 4-stage convolutional neural network.
             </p>
           </div>
 
@@ -64,7 +65,7 @@ export const AboutPage: React.FC = () => {
       </section>
 
       <MarqueeBanner
-        text="★ GTZAN 1,000 AUDIO TRACKS ★ 22,050 HZ SPECTRAL ANALYSIS ★ 4-STAGE 2D-CNN ★ 422,506 PARAMETERS ★"
+        text="★ GTZAN 1,000 AUDIO TRACKS ★ UPLOADS: CLAP PROBE ★ LIVE: 2D-CNN, 422,506 PARAMETERS ★"
         bg="bg-[#14032A]"
       />
 
@@ -98,7 +99,7 @@ export const AboutPage: React.FC = () => {
                 Sampling Rate
               </span>
               <span className="text-4xl font-display text-[#FFE9FF]">22,050 HZ</span>
-              <span className="text-xs font-medium text-[#FFE9FF] block mt-1">16-bit uncompressed mono PCM</span>
+              <span className="text-xs font-medium text-[#FFE9FF] block mt-1">16-bit uncompressed mono PCM (dataset format; CLAP resamples to 48 kHz)</span>
             </div>
           </div>
 
@@ -128,11 +129,14 @@ export const AboutPage: React.FC = () => {
           <div className="flex items-center gap-3 pb-3 border-b-2 border-[#FF3CAC]">
             <Sliders className="w-6 h-6 text-[#FFE9FF]" />
             <h2 className="text-3xl font-display uppercase tracking-tight text-[#FFE9FF]">
-              ACOUSTIC PREPROCESSING PIPELINE
+              LIVE MIC CNN PREPROCESSING (22.05 KHZ MEL PIPELINE)
             </h2>
           </div>
 
           <div className="bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal rounded-2xl p-6 space-y-4">
+            <p className="text-xs font-medium text-[#C9A8E0] leading-relaxed">
+              The steps below are the CNN pipeline (live mic, and uploads when the CLAP model is unavailable). The upload model takes a different path: the file is decoded to 22,050 Hz mono, resampled to 48,000 Hz, split into up to three 10-second clips (zero-padded if short), and CLAP computes its own mel features internally. It does not use the 128-band spectrogram below, and content above 11 kHz is already gone after the 22,050 Hz decode.
+            </p>
             <div className="space-y-3 font-mono text-xs">
               <div className="p-3.5 rounded-xl bg-[#2A0A4A] border-2 border-[#FF3CAC] flex items-start gap-3">
                 <span className="w-7 h-7 rounded-lg bg-[#FFB347] border border-[#FF3CAC] font-bold text-sm text-[#1A0536] flex items-center justify-center shrink-0">
@@ -185,12 +189,36 @@ export const AboutPage: React.FC = () => {
           </div>
         </section>
 
+        {/* Upload model */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-3 pb-3 border-b-2 border-[#FF3CAC]">
+            <Sparkles className="w-6 h-6 text-[#FFE9FF]" />
+            <h2 className="text-3xl font-display uppercase tracking-tight text-[#FFE9FF]">
+              UPLOAD MODEL: CLAP + PROBE
+            </h2>
+          </div>
+          <div className="bg-[#2A0A4A] border-2 border-[#FF3CAC] shadow-brutal rounded-2xl p-6 space-y-3 text-sm font-medium text-[#FFE9FF] leading-relaxed">
+            <p>
+              {modelInfo?.upload_model?.clap_available === false
+                ? 'The upload model is not available on this server right now, so uploads use the CNN below.'
+                : 'Uploaded tracks go through laion/clap-htsat-unfused (frozen, pretrained) in three 10-second clips. A logistic regression trained on our GTZAN training tracks turns the embeddings into genre scores.'}
+            </p>
+            <p>
+              Held-out result: {modelInfo?.upload_model?.heldout_tracks_correct ?? 88} of {modelInfo?.upload_model?.heldout_tracks_total ?? 101} whole test tracks correct (87.1%; 95% interval roughly 79-93%).
+              Split by track with duplicate files kept together; the classifier setting was chosen on a separate validation set, and no test result was used to pick or tune anything (the test tracks were scored again later to verify the number).
+            </p>
+            <p className="text-[#C9A8E0]">
+              Limits: one GTZAN split, 101 test tracks. GTZAN has known label noise and near-duplicate artists. CLAP's pretraining data is large and may overlap with GTZAN songs, so we cannot call these songs unseen to the pretrained model. Short clips score lower (about 62-73% with 1 to 10 three-second windows).
+            </p>
+          </div>
+        </section>
+
         {/* 3. Deep CNN Architecture */}
         <section className="space-y-6">
           <div className="flex items-center gap-3 pb-3 border-b-2 border-[#FF3CAC]">
             <Cpu className="w-6 h-6 text-[#FFE9FF]" />
             <h2 className="text-3xl font-display uppercase tracking-tight text-[#FFE9FF]">
-              DEEP 2D-CNN ARCHITECTURE
+              LIVE MIC MODEL: 2D-CNN
             </h2>
           </div>
 
@@ -263,7 +291,7 @@ export const AboutPage: React.FC = () => {
               <strong>3. Acoustic Hardware coloration:</strong> Studio recordings feature balanced master tracks, whereas microphone feeds introduce room reverberation, ambient background noise, and microphone frequency coloration.
             </p>
             <p>
-              <strong>4. Uncalibrated Activations:</strong> Softmax scores represent relative model activation strength across the 10 GTZAN categories, rather than calibrated posterior probabilities.
+              <strong>4. Uncalibrated Scores:</strong> The CNN's softmax scores and the upload classifier's probabilities are relative scores across the 10 GTZAN categories, not calibrated posterior probabilities.
             </p>
           </div>
         </section>
