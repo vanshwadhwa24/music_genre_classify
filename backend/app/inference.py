@@ -123,6 +123,12 @@ class ModelManager:
 
         return self._format_predictions(self.live_ema_scores)
 
+    def format_probs(self, probs: np.ndarray, status: str) -> PredictionResult:
+        """Format externally computed probabilities (e.g. upload-only CLAP probe)."""
+        res = self._format_predictions(probs)
+        res.model_status = status
+        return res
+
     def _format_predictions(self, probs: np.ndarray) -> PredictionResult:
         """Format probability array into typed PredictionResult."""
         scores_list = []

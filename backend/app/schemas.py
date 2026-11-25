@@ -72,6 +72,7 @@ class HealthResponse(BaseModel):
     genres: List[str]
     device: str
     version: str
+    upload_model: Optional[str] = None
 
 
 class ModelArchitectureInfo(BaseModel):
@@ -80,3 +81,4 @@ class ModelArchitectureInfo(BaseModel):
     classes: List[str]
     preprocessing: Dict[str, Any]
     limitations: List[str]
+    upload_model: Optional[Dict[str, Any]] = None
