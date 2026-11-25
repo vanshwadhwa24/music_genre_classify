@@ -137,17 +137,17 @@ export const App: React.FC = () => {
                 NEON RADIO
               </span>
               <span className="text-[11px] font-mono text-[#FFE9FF]/80">
-                GTZAN CNN PWA
+                GTZAN GENRE PWA
               </span>
             </div>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-2 font-mono text-[11px]">
             <span className="bg-[#2A0A4A] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
-              PYTORCH 2D-CNN
+              CLAP UPLOADS + CNN LIVE
             </span>
             <span className="bg-[#FF3CAC] text-[#1A0536] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
-              22.05 KHZ MONO
+              22.05 KHZ DECODE
             </span>
             <span className="bg-[#3DFFD0] text-[#1A0536] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
               128 MEL BANDS
