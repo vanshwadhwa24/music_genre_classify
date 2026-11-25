@@ -27,7 +27,7 @@ export interface PredictionResult {
   leading_display_name: string;
   top_three: GenreScore[];
   all_scores: GenreScore[];
-  model_status: 'ACTIVE_MODEL' | 'CLAP_LOGREG_UPLOAD' | 'DEVELOPMENT_BASELINE' | 'DEVELOPMENT_MOCK' | 'UNAVAILABLE';
+  model_status: 'ACTIVE_MODEL' | 'CLAP_LOGREG_UPLOAD' | 'CLAP_AST_LOGREG_UPLOAD' | 'DEVELOPMENT_BASELINE' | 'DEVELOPMENT_MOCK' | 'UNAVAILABLE';
   is_mock: boolean;
   is_calibrated: boolean;
 }

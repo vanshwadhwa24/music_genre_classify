@@ -19,7 +19,7 @@ PROBE_PATH = Path(__file__).resolve().parent.parent.parent / "ml" / "artifacts" 
 
 
 def enabled() -> bool:
-    return os.getenv("UPLOAD_MODEL", "clap").lower() == "clap"
+    return os.getenv("UPLOAD_MODEL", "clap").lower() in ("clap", "clap_ast")
 
 
 class ClapUploadClassifier:

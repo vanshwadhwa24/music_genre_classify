@@ -377,7 +377,15 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = ({ isBackendHealthy }) 
               </div>
 
               <div className="p-4 rounded-xl bg-[#1A0536] border-2 border-[#FF3CAC] text-xs text-[#FFE9FF] font-medium leading-relaxed">
-                Top score: <strong className="font-mono font-bold text-sm">{analysisResult.prediction.top_three[0].percentage.toFixed(1)}%</strong> ({analysisResult.prediction.top_three[0].score.toFixed(4)} {analysisResult.prediction.model_status === 'CLAP_LOGREG_UPLOAD' ? 'classifier probability' : 'softmax score'}).
+                Top score: <strong className="font-mono font-bold text-sm">{analysisResult.prediction.top_three[0].percentage.toFixed(1)}%</strong> ({analysisResult.prediction.top_three[0].score.toFixed(4)} {(analysisResult.prediction.model_status === 'CLAP_LOGREG_UPLOAD' || analysisResult.prediction.model_status === 'CLAP_AST_LOGREG_UPLOAD') ? 'classifier probability' : 'softmax score'}).
+                {!analysisResult.prediction.is_calibrated && analysisResult.prediction.model_status === 'CLAP_AST_LOGREG_UPLOAD' && (
+                  <span className="ml-1 text-[#C9A8E0]">
+                    Uncalibrated probabilities from a small classifier on top of two pretrained audio models (CLAP and AST), trained on our GTZAN split. Audio is decoded at 22.05 kHz, resampled for each model and cut into up to three 10-second clips.
+                    Held-out result: 92 of 101 test tracks correct (91.1%; 95% interval roughly 84-95%), versus 88 of 101 for the CLAP-only classifier; with only 101 test tracks the improvement is uncertain (cross-validation on 898 train+val tracks pointed the same way).
+                    It was measured on one split of GTZAN, which has duplicates and label noise, and both models' pretraining data may overlap with GTZAN songs, so this is not proof of the same accuracy on new music.
+                    Best for full tracks: short clips are less reliable.
+                  </span>
+                )}
                 {!analysisResult.prediction.is_calibrated && analysisResult.prediction.model_status === 'CLAP_LOGREG_UPLOAD' && (
                   <span className="ml-1 text-[#C9A8E0]">
                     Uncalibrated probabilities from a small classifier on top of a pretrained CLAP audio model, trained on our GTZAN split. Audio is decoded at 22.05 kHz, resampled to 48 kHz and cut into up to three 10-second clips.
@@ -386,7 +394,7 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = ({ isBackendHealthy }) 
                     Best for full tracks: with only a few seconds of audio, accuracy was about 62-73% in our tests.
                   </span>
                 )}
-                {!analysisResult.prediction.is_calibrated && analysisResult.prediction.model_status !== 'CLAP_LOGREG_UPLOAD' && (
+                {!analysisResult.prediction.is_calibrated && analysisResult.prediction.model_status !== 'CLAP_LOGREG_UPLOAD' && analysisResult.prediction.model_status !== 'CLAP_AST_LOGREG_UPLOAD' && (
                   <span className="ml-1 text-[#C9A8E0]">
                     Raw uncalibrated neural activations across the 10 GTZAN categories.
                     This clip is {analysisResult.track.duration_seconds.toFixed(1)}s long; the model was trained on 30-second GTZAN excerpts,

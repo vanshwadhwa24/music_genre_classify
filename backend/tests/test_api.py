@@ -110,3 +110,20 @@ def test_analyze_falls_back_to_cnn_when_clap_disabled(client, monkeypatch):
         response = client.post("/api/analyze", files={"file": ("rock_sample.wav", f, "audio/wav")})
     assert response.status_code == 200
     assert response.json()["prediction"]["model_status"] != "CLAP_LOGREG_UPLOAD"
+
+
+def test_clap_ast_probe_shape_and_clipping():
+    import numpy as np
+    from backend.app import ast_inference as A
+
+    p = np.load(A.PROBE_PATH, allow_pickle=False)
+    assert p["coef"].shape == (10, 1280) and p["mean"].shape == (1280,)
+    clips = A._clips(np.zeros(16000 * 30, dtype=np.float32), A.AST_SR)
+    assert len(clips) == 3 and all(len(c) == 16000 * 10 for c in clips)
+
+
+def test_clap_ast_is_opt_in(monkeypatch):
+    from backend.app import ast_inference as A
+
+    monkeypatch.delenv("UPLOAD_MODEL", raising=False)
+    assert not A.clap_ast_classifier.available()
