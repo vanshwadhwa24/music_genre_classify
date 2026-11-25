@@ -27,7 +27,7 @@ export interface PredictionResult {
   leading_display_name: string;
   top_three: GenreScore[];
   all_scores: GenreScore[];
-  model_status: 'ACTIVE_MODEL' | 'DEVELOPMENT_BASELINE' | 'DEVELOPMENT_MOCK' | 'UNAVAILABLE';
+  model_status: 'ACTIVE_MODEL' | 'CLAP_LOGREG_UPLOAD' | 'DEVELOPMENT_BASELINE' | 'DEVELOPMENT_MOCK' | 'UNAVAILABLE';
   is_mock: boolean;
   is_calibrated: boolean;
 }
@@ -76,4 +76,12 @@ export interface ModelArchitectureInfo {
     scaling: string;
   };
   limitations: string[];
+  upload_model?: {
+    active: string;
+    clap_available: boolean;
+    fallback: string;
+    heldout_tracks_correct: number;
+    heldout_tracks_total: number;
+    note: string;
+  };
 }
