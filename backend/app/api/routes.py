@@ -20,6 +20,7 @@ from backend.app.audio import (
     png_to_data_uri,
 )
 from backend.app.inference import model_manager
+from backend.app.clap_inference import clap_classifier
 from backend.app.config import settings
 from ml.preprocessing.audio_features import (
     GENRES,
@@ -47,6 +48,7 @@ async def health_check():
         genres=GENRES,
         device=str(model_manager.device),
         version=settings.version,
+        upload_model="CLAP_LOGREG_UPLOAD" if clap_classifier.available() else "CNN_FALLBACK",
     )
 
 
@@ -76,7 +78,13 @@ async def analyze_track(
 
     # Model inference
     try:
-        prediction = model_manager.predict(mel_db)
+        prediction = None
+        if clap_classifier.available():
+            probs = clap_classifier.predict_probs(y, settings.sample_rate)
+            if probs is not None:
+                prediction = model_manager.format_probs(probs, status="CLAP_LOGREG_UPLOAD")
+        if prediction is None:
+            prediction = model_manager.predict(mel_db)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Model inference failed: {str(e)}")
 
@@ -155,7 +163,7 @@ async def get_model_info():
         model_manager.load_model()
     arch = model_manager.model.get_architecture_summary() if model_manager.model else {}
     return ModelArchitectureInfo(
-        name="GTZAN 2D-CNN Audio Spectrogram Classifier",
+        name="GTZAN 2D-CNN (live mic and upload fallback) + CLAP probe (uploads)",
         parameters_total=arch.get("total_parameters", 0),
         classes=[GENRE_DISPLAY_NAMES[g] for g in GENRES],
         preprocessing={
@@ -166,11 +174,23 @@ async def get_model_info():
             "hop_length": HOP_LENGTH,
             "n_mels": N_MELS,
             "scaling": "Decibels (dB) via librosa.power_to_db + z-score normalization",
+            "applies_to": "CNN only (live mic and upload fallback)",
+        },
+        upload_model={
+            "active": "CLAP_LOGREG_UPLOAD" if clap_classifier.available() else "CNN_FALLBACK",
+            "clap_available": clap_classifier.available(),
+            "fallback": "GTZAN 2D-CNN (49.5% held-out track accuracy)",
+            "heldout_tracks_correct": 88,
+            "heldout_tracks_total": 101,
+            "input": "Decoded at 22.05 kHz mono, resampled to 48 kHz, up to three 10 s clips, CLAP internal mel features",
+            "note": "One GTZAN track split; CLAP pretraining overlap with GTZAN not ruled out.",
         },
         limitations=[
             "GTZAN dataset contains subtle label noise, occasional repetitions, and distortion artifacts in historical recordings.",
             "Trained predominantly on 30-second studio excerpts; accuracy degrades on very short rolling audio (< 2.0s).",
             "Acoustic noise, microphone frequency response differences, and room reverberation may alter classification scores during live listening.",
-            "Raw softmax outputs represent relative model activation scores, not formally calibrated posterior probabilities.",
+            "Upload model: frozen pretrained CLAP (48 kHz, 10 s clips) + logistic regression; 88/101 held-out GTZAN test tracks correct (87.1%, 95% interval roughly 79-93%). One split; CLAP pretraining may overlap GTZAN songs. Test tracks were not used for any selection.",
+            "Short audio (a few seconds) scores lower than full tracks for both models.",
+            "CNN softmax outputs and the upload classifier's probabilities are relative scores, not formally calibrated posterior probabilities.",
         ],
     )
