@@ -6,7 +6,7 @@ interface MarqueeBannerProps {
 }
 
 export const MarqueeBanner: React.FC<MarqueeBannerProps> = ({
-  text = 'NEON RADIO ★ 10 GTZAN GENRES ★ MEL-SPECTROGRAM CNN ★ UPLOAD OR LISTEN ★',
+  text = 'NEON RADIO ★ 10 GTZAN GENRES ★ CLAP UPLOADS ★ CNN LIVE MIC ★ UPLOAD OR LISTEN ★',
   bg = 'bg-[#14032A]',
 }) => {
   return (

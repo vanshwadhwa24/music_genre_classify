@@ -20,7 +20,19 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
         <Sparkles className="w-3.5 h-3.5 text-[#FFE9FF]" />
         <span>TRAINED CNN MODEL</span>
         {!isCalibrated && !compact && (
-          <span className="text-[#FFE9FF]/70 font-mono text-[10px] ml-1">(Raw Softmax)</span>
+          <span className="text-[#FFE9FF]/70 font-mono text-[10px] ml-1">(Uncalibrated)</span>
+        )}
+      </div>
+    )
+  }
+
+  if (status === 'CLAP_LOGREG_UPLOAD' && !isMock) {
+    return (
+      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#FFB347] text-[#1A0536] border-2 border-[#FF3CAC] shadow-brutal-sm">
+        <Sparkles className="w-3.5 h-3.5 text-[#FFE9FF]" />
+        <span>PRETRAINED CLAP + PROBE</span>
+        {!compact && (
+          <span className="text-[#FFE9FF]/70 font-mono text-[10px] ml-1">(upload model)</span>
         )}
       </div>
     )
