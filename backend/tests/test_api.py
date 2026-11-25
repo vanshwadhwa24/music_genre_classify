@@ -102,3 +102,11 @@ def test_invalid_file_handling(client):
         files={"file": ("corrupt.wav", b"not-audio-bytes-at-all", "audio/wav")},
     )
     assert response.status_code == 422
+
+
+def test_analyze_falls_back_to_cnn_when_clap_disabled(client, monkeypatch):
+    monkeypatch.setenv("UPLOAD_MODEL", "cnn")
+    with SAMPLE_ROCK_PATH.open("rb") as f:
+        response = client.post("/api/analyze", files={"file": ("rock_sample.wav", f, "audio/wav")})
+    assert response.status_code == 200
+    assert response.json()["prediction"]["model_status"] != "CLAP_LOGREG_UPLOAD"
