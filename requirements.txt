@@ -17,3 +17,7 @@ torch>=2.4.0
 # Testing & Quality
 pytest>=8.0.0
 httpx>=0.27.0
+
+# Upload-only CLAP probe (optional; falls back to the CNN if missing)
+transformers>=4.40.0
+scikit-learn>=1.4.0  # only needed to retrain the probe
