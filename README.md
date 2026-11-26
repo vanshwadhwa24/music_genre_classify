@@ -140,8 +140,9 @@ python ml/training/train.py \
 ```
 
 ### Training Results (committed checkpoint)
-The committed checkpoint `artifacts/models/genre_cnn.pt` was trained on the cached GTZAN
-spectrograms in this repo (999 valid tracks; leakage-checked 798/100/101 train/val/test split,
+The committed checkpoint `artifacts/models/genre_cnn.pt` was trained on cached GTZAN
+spectrograms (999 valid tracks; the cache is not stored in Git, regenerate it with
+`python ml/scripts/prepare_features.py` after placing the GTZAN audio in `ml/Data/genres_original`; leakage-checked 798/100/101 train/val/test split,
 see `ml/reports/splits.json` and `ml/reports/audit_report.md`):
 
 - Best validation accuracy: **66.0%** (epoch 23, early stopping; `ml/reports/training_history.json`, `ml/reports/training_curves.png`)

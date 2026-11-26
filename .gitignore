@@ -35,3 +35,6 @@ Thumbs.db
 .vscode/
 *.swp
 *.log
+
+# Generated spectrogram cache (regenerate with ml/scripts/prepare_features.py)
+ml/cache/
