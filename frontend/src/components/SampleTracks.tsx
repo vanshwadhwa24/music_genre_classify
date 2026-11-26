@@ -14,29 +14,29 @@ export interface SampleTrackItem {
 export const SAMPLE_TRACKS: SampleTrackItem[] = [
   {
     id: 'rock',
-    name: 'Overdrive Riff & Beat',
+    name: '4th Street Exit',
     genre: 'Rock',
     url: '/samples/rock_sample.wav',
     filename: 'sample_rock.wav',
-    description: 'Electric guitar harmonics, distortion clipping & driving snare transient',
+    description: 'Systems Go, US Air Force Band of Flight (public domain, Wikimedia Commons). Rock band recording, 12s excerpt',
     cardBg: 'bg-[#FFB347]',
   },
   {
     id: 'classical',
-    name: 'Polyphonic String Ensemble',
+    name: 'Symphony No. 4, I.',
     genre: 'Classical',
     url: '/samples/classical_sample.wav',
     filename: 'sample_classical.wav',
-    description: 'Sustained chord progression with vibrato and orchestral decay',
+    description: 'Beethoven, Musopen recording (public domain, Wikimedia Commons). Orchestral, 12s excerpt',
     cardBg: 'bg-[#FF3CAC]',
   },
   {
     id: 'jazz',
-    name: 'Walking Bass & Rhodes 7ths',
+    name: 'Off to Osaka',
     genre: 'Jazz',
     url: '/samples/jazz_sample.wav',
     filename: 'sample_jazz.wav',
-    description: 'Acoustic upright bassline, syncopated electric piano and ride tap',
+    description: 'Kevin MacLeod, CC BY 3.0. Jazz, 12s excerpt',
     cardBg: 'bg-[#3DFFD0]',
   },
 ]
@@ -59,7 +59,7 @@ export const SampleTracks: React.FC<SampleTracksProps> = ({ onSelectSample, disa
               WHAT ARE YOU JAMMING ON?
             </h3>
             <p className="text-xs text-[#C9A8E0] font-medium">
-              Pick a synthesized demonstration track from the crate to test the live pipeline (12s clips, outside the 30s GTZAN training data - scores are a demo, not an accuracy claim)
+              Pick a real recording (public domain per Wikimedia Commons, or CC BY with credit) from the crate to test the live pipeline (12s excerpts, outside the GTZAN data). These three were chosen after testing, so they are a demo, not an accuracy claim
             </p>
           </div>
         </div>
