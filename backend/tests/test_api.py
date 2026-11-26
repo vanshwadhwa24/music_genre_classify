@@ -122,8 +122,8 @@ def test_clap_ast_probe_shape_and_clipping():
     assert len(clips) == 3 and all(len(c) == 16000 * 10 for c in clips)
 
 
-def test_clap_ast_is_opt_in(monkeypatch):
+def test_clap_ast_is_default(monkeypatch):
     from backend.app import ast_inference as A
 
     monkeypatch.delenv("UPLOAD_MODEL", raising=False)
-    assert not A.clap_ast_classifier.available()
+    assert A.clap_ast_classifier.available()

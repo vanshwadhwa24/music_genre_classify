@@ -1,4 +1,4 @@
-"""Optional stronger upload classifier: frozen CLAP audio embeddings + logistic regression.
+"""Upload classifier (also used as the CLAP stage of the default CLAP+AST classifier): frozen CLAP audio embeddings + logistic regression.
 
 Used only for uploaded tracks (about 30 s). Live microphone windows keep the light CNN.
 Loads lazily; if transformers, the CLAP weights or the probe file are unavailable the
@@ -19,7 +19,7 @@ PROBE_PATH = Path(__file__).resolve().parent.parent.parent / "ml" / "artifacts" 
 
 
 def enabled() -> bool:
-    return os.getenv("UPLOAD_MODEL", "clap").lower() in ("clap", "clap_ast")
+    return os.getenv("UPLOAD_MODEL", "clap_ast").lower() in ("clap", "clap_ast")
 
 
 class ClapUploadClassifier:

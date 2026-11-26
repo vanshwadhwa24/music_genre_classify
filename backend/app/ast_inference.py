@@ -1,7 +1,7 @@
 """Candidate upload classifier: frozen CLAP + frozen AST embeddings -> logistic regression.
 
-Research candidate (held-out 92/101 on one split). Used only for uploaded tracks; live
-microphone windows keep the light CNN. AST is BSD-3-Clause (MIT/ast-finetuned-audioset-10-10-0.4593).
+Default upload classifier (held-out 92/101 on one split; small test, gain over the CLAP-only
+probe is uncertain). Used only for uploaded tracks; live microphone windows keep the light CNN. AST is BSD-3-Clause (MIT/ast-finetuned-audioset-10-10-0.4593).
 Loads lazily and shares the CLAP encoder with clap_inference. Any failure returns None so the
 caller falls back to the CLAP probe, then the CNN.
 """
@@ -21,7 +21,7 @@ PROBE_PATH = Path(__file__).resolve().parent.parent.parent / "ml" / "artifacts" 
 
 
 def enabled() -> bool:
-    return os.getenv("UPLOAD_MODEL", "clap").lower() == "clap_ast"
+    return os.getenv("UPLOAD_MODEL", "clap_ast").lower() == "clap_ast"
 
 
 def _clips(y: np.ndarray, sr: int):

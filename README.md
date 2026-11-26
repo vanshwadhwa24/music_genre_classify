@@ -163,6 +163,16 @@ The backend automatically detects and loads checkpoints:
 - Override with `MODEL_PATH=<path>` to load a different checkpoint.
 - If no checkpoint is found the app falls back to randomly initialized weights and the status badge shows `Baseline PyTorch CNN`; with the trained checkpoint it shows `Trained CNN Model`.
 
+### Upload Models (uploaded files only)
+Uploads use pretrained-audio classifiers instead of the CNN; live microphone windows always use the CNN.
+- **Default (`UPLOAD_MODEL=clap_ast`):** frozen CLAP + AST embeddings with a logistic-regression probe (`ml/artifacts/clap_ast_logreg.npz`). Held-out GTZAN result: 92/101 test tracks (91.1%; 95% interval roughly 84-95%) vs 88/101 for the CLAP-only probe. The test set is small and measured once, so whether the improvement is real is uncertain; cross-validation on 898 train+val tracks pointed the same way.
+- **`UPLOAD_MODEL=clap`:** CLAP-only probe, lighter (no AST; use on hosts short on RAM).
+- **`UPLOAD_MODEL=cnn`:** the lightweight CNN.
+- If the heavier models fail to load, the app falls back automatically (clap_ast -> clap -> cnn).
+
+Measured footprint on a 1-core / 2 GB sandbox: about 1.5 GB peak memory with CNN + CLAP + AST loaded, about 6 s median per uploaded track (first request slower while weights load).
+Caveats: one split of GTZAN (which has duplicates and label noise), and CLAP/AST pretraining data may overlap GTZAN songs, so these numbers are not a guarantee on new music.
+
 ---
 
 ## 6. Progressive Web App (PWA) Capabilities
