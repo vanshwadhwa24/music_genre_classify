@@ -176,7 +176,7 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = ({ isBackendHealthy }) 
               </p>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#FF3CAC] text-xs font-bold text-[#FFE9FF] bg-[#14032A]/60">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>UPLOAD: CLAP PROBE &middot; LIVE: CNN</span>
+                <span>UPLOAD: CLAP + AST PROBE &middot; LIVE: CNN</span>
               </div>
             </div>
             <div className="shrink-0 flex items-center justify-center">

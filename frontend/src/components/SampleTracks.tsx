@@ -27,7 +27,7 @@ export const SAMPLE_TRACKS: SampleTrackItem[] = [
     genre: 'Classical',
     url: '/samples/classical_sample.wav',
     filename: 'sample_classical.wav',
-    description: 'Beethoven, Musopen recording (public domain, Wikimedia Commons). Orchestral, 12s excerpt',
+    description: 'Beethoven, Skidmore College Orchestra via Musopen (public domain, Wikimedia Commons). Orchestral, 12s excerpt',
     cardBg: 'bg-[#FF3CAC]',
   },
   {

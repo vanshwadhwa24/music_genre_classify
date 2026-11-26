@@ -144,7 +144,7 @@ export const App: React.FC = () => {
 
           <div className="flex flex-wrap items-center justify-center gap-2 font-mono text-[11px]">
             <span className="bg-[#2A0A4A] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
-              CLAP UPLOADS + CNN LIVE
+              CLAP + AST UPLOADS + CNN LIVE
             </span>
             <span className="bg-[#FF3CAC] text-[#1A0536] px-3 py-1 rounded-full border border-[#FF3CAC] shadow-brutal-sm">
               22.05 KHZ DECODE
