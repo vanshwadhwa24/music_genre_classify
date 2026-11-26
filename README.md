@@ -81,6 +81,11 @@ pip install torch --index-url https://download.pytorch.org/whl/cpu
 # Install the remaining dependencies (torch is already satisfied, so it stays CPU-only)
 pip install -r requirements.txt
 
+# Live microphone listening needs the ffmpeg binary (the browser sends webm audio).
+# Without it, /api/live/predict returns 422. Install it first:
+#   Ubuntu/Debian: sudo apt install ffmpeg      macOS: brew install ffmpeg
+ffmpeg -version
+
 # Start FastAPI backend
 uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
