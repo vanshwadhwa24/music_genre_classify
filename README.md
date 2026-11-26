@@ -74,7 +74,11 @@ music-genre-classifier/
 python3 -m venv .venv
 source .venv/bin/activate
 
-# Install dependencies
+# Install CPU-only PyTorch first (avoids ~2 GB of NVIDIA CUDA packages that a plain
+# `pip install torch` pulls on Linux). Skip this line if you have an NVIDIA GPU.
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+# Install the remaining dependencies (torch is already satisfied, so it stays CPU-only)
 pip install -r requirements.txt
 
 # Start FastAPI backend
